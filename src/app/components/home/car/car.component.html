@@ -1,0 +1,20 @@
+<div  *ngIf="!loading">
+    <h1>Liste de votre voiture voiture</h1>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Marque</th>
+            <th scope="col">Modele</th>
+            <th scope="col">Date de Sortie</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let car of cars">
+            <td>{{car.car_mark}}</td>
+            <td>{{car.car_model}}</td>
+            <td>{{car.year_of_manufacture}}</td>
+          </tr>
+        </tbody>
+    </table>
+</div>
+

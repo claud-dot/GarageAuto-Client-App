@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { UtlisService } from './services/utlis.service';
+import { Component , OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,21 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'GarageAuto-Client-App';
+
+  constructor(private utils : UtlisService){
+    utils.CheckSession();
+  }
+
+  public loadScript(url : string) {
+    let node = document.createElement('script');
+    node.src = url;
+    node.type = 'text/javascript';
+    document.getElementsByTagName('head')[0].appendChild(node);
+  }
+
+  ngOnInit(){
+    this.loadScript("assets/js/main.js");
+    this.loadScript("assets/js/popper.js")
+  }
+
 }
