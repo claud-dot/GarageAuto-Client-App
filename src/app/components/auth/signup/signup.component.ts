@@ -1,3 +1,4 @@
+import { UtlisService } from './../../../services/utlis.service';
 import { Component , OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -12,8 +13,11 @@ export class SignupComponent {
   hide : any = [];
   loading : any = {};
   user_role : any = {};
+  utils : any;
 
-  constructor(private formbuild : FormBuilder){}
+  constructor(private formbuild : FormBuilder , private utilService : UtlisService){
+    this.utils = utilService;
+  }
 
   initForm(){
     this.signUpForm = this.formbuild.group({
@@ -30,17 +34,14 @@ export class SignupComponent {
         password : new FormControl( null , Validators.compose([
             Validators.required,
             Validators.pattern(/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W)/),
-            Validators.minLength(6)
+            Validators.minLength(4)
         ]))
     })
   }
 
-  onBlurForm(formName : string , elementId : string) {}
-
-  onSubmitForm(){}
-
-  onHidePass( hide : boolean ){}
-
+  onHidePass(hide : boolean){
+    this.hide = !hide;
+  }
   initHide(){
       this.hide.pass = true;
       this.hide.confirm = true;

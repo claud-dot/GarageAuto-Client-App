@@ -8,13 +8,13 @@
                 
                 
                 <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-                    <input formControlName="email" (blur)="onBlurForm('email' , 'email')" class="input100" type="text" name="email" id="email">
+                    <input formControlName="email" (blur)="utils.onBlurForm('email' , 'email' , this.loginForm)" class="input100" type="text" name="email" id="email">
                     <span class="focus-input100"></span>
                     <span class="label-input100">Email</span>
                 </div>
                 
                 <div class="wrap-input100 validate-input" data-validate="Role is required">
-                    <select class="select100" formControlName="role" (blur)="onBlurForm('role' , 'role')" (change)="onBlurForm('role' , 'role')" aria-label="Default select example" id="role">
+                    <select class="select100" formControlName="role" (blur)="utils.onBlurForm('role' , 'role' , this.loginForm)" (change)="utils.onBlurForm('role' , 'role' , this.loginForm)" aria-label="Default select example" id="role">
                         <option *ngFor="let role of ['','Client' , 'Atelier' , 'Caisse']">{{role}}</option>
                     </select> 
                     <span class="focus-input100"></span>
@@ -22,14 +22,14 @@
                 </div>
 
                 <div class="wrap-input100 validate-input" data-validate="Password is required">
-                    <input formControlName="password" (blur)="onBlurForm('password' , 'password')" [type]="hide ? 'password' : 'text'"  class="input100" type="password" name="pass" id="password">
+                    <input formControlName="password" (blur)="utils.onBlurForm('password' , 'password' , this.loginForm)" [type]="hide ? 'password' : 'text'"  class="input100" type="password" name="pass" id="password">
                     <span class="focus-input100"></span>
                     <span class="label-input100">Password</span>
                     <span class="eye-icon" *ngIf="!hide" (click)="onHidePass(hide)"><i class="fa fa-eye" aria-hidden="true"></i></span>
                     <span class="eye-slash-icon" *ngIf="hide" (click)="onHidePass(hide)"><i class="fa fa-eye-slash" aria-hidden="true"></i></span>
                 </div>
 
-                <div class="flex-sb-m w-full p-t-3 p-b-32">
+                <!-- <div class="flex-sb-m w-full p-t-3 p-b-32">
                     <div class="contact100-form-checkbox">
                         <input formControlName="remember" class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
                         <label class="label-checkbox100" for="ckb1">
@@ -42,12 +42,16 @@
                             Forgot Password?
                         </a>
                     </div>
-                </div>
+                </div> -->
         
 
                 <div class="container-login100-form-btn">
-                    <button (click)="onSubmitForm()" class="login100-form-btn">
+                    <button *ngIf="!loading.login" (click)="utils.onSubmitForm(this.loginForm , loading)" class="login100-form-btn">
                         Login
+                    </button>
+                    <button *ngIf="loading.login" type="button" disabled class="login100-form-btn">
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Loading...
                     </button>
                 </div>
                 
@@ -59,7 +63,7 @@
                 </div>
             </form>
 
-            <div class="login100-more" [ngStyle]="{backgroundImage:  'url(assets/images/reparation-voiture.jpg)' }">
+            <div class="login100-more" [ngStyle]="{backgroundImage:  'url(assets/images/car-repair.jpg)' }">
             </div>
         </div>
     </div>

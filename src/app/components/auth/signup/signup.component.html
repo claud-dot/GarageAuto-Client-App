@@ -6,28 +6,28 @@
                     Sign Up
                 </span>
                 
-                <div class="wrap-input100 validate-input" data-validate = "Username is required">
-                    <input formControlName="username" (blur)="onBlurForm('username' , 'username')" class="input100" type="text" name="email" id="username">
+                <div class="wrap-input100 validate-input" data-validate = "Username is required and must at least 4 characters ">
+                    <input formControlName="username" (blur)="utils.onBlurForm('username' , 'username' , this.signUpForm)" (input)="utils.onBlurForm('username' , 'username' , this.signUpForm)" class="input100" type="text" name="email" id="username">
                     <span class="focus-input100"></span>
                     <span class="label-input100">Username</span>
                 </div>
 
                 <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-                    <input formControlName="email" (blur)="onBlurForm('email' , 'email')" class="input100" type="text" name="email" id="email">
+                    <input formControlName="email" (blur)="utils.onBlurForm('email' , 'email' , this.signUpForm)" (input)="utils.onBlurForm('email' , 'email' , this.signUpForm)" class="input100" type="text" name="email" id="email">
                     <span class="focus-input100"></span>
                     <span class="label-input100">Email</span>
                 </div>
                 
                 <div class="wrap-input100 validate-input" data-validate="Role is required">
-                    <select class="select100" formControlName="role" (blur)="onBlurForm('role' , 'role')" (change)="onBlurForm('role' , 'role')" aria-label="Default select example" id="role">
+                    <select class="select100" formControlName="role" (blur)="utils.onBlurForm('role' , 'role' , this.signUpForm)" (change)="utils.onBlurForm('role' , 'role' , this.signUpForm)" aria-label="Default select example" id="role">
                         <option *ngFor="let role of ['','Client' , 'Atelier' , 'Caisse']">{{role}}</option>
                     </select> 
                     <span class="focus-input100"></span>
                     <span class="label-input100">Role</span>
                 </div>
 
-                <div class="wrap-input100 validate-input" data-validate="Password is required">
-                    <input formControlName="password" (blur)="onBlurForm('password' , 'password')" [type]="hide ? 'password' : 'text'"  class="input100" type="password" name="pass" id="password">
+                <div class="wrap-input100 validate-input" data-validate="Password is required and must at least 4 characters including 1 uppercase, 1 lowercase, 1 number and 1 special character">
+                    <input formControlName="password" (blur)="utils.onBlurForm('password' , 'password' , this.signUpForm)" (input)="utils.onBlurForm('password' , 'password' , this.signUpForm)" [type]="hide ? 'password' : 'text'"  class="input100" type="password" name="pass" id="password">
                     <span class="focus-input100"></span>
                     <span class="label-input100">Password</span>
                     <span class="eye-icon" *ngIf="!hide" (click)="onHidePass(hide)"><i class="fa fa-eye" aria-hidden="true"></i></span>
@@ -35,7 +35,7 @@
                 </div>
 
                 <div class="container-login100-form-btn">
-                    <button (click)="onSubmitForm()" class="login100-form-btn">
+                    <button (click)="utils.onSubmitForm(this.signUpForm , loading , 'Reg')" class="login100-form-btn">
                         Create My Account
                     </button>
                 </div>

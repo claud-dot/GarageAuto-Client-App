@@ -1,3 +1,4 @@
+import { UtlisService } from './services/utlis.service';
 import { Component , OnInit } from '@angular/core';
 
 @Component({
@@ -7,6 +8,10 @@ import { Component , OnInit } from '@angular/core';
 })
 export class AppComponent {
   title = 'GarageAuto-Client-App';
+
+  constructor(private utils : UtlisService){
+    utils.CheckSession();
+  }
 
   public loadScript(url : string) {
     let node = document.createElement('script');
