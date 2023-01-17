@@ -1,1 +1,55 @@
-<p>signup works!</p>
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100 ">
+            <form *ngIf="!loading.role" [formGroup]="signUpForm" class="login100-form validate-form">
+                <span class="login100-form-title p-b-43">
+                    Sign Up
+                </span>
+                
+                <div class="wrap-input100 validate-input" data-validate = "Username is required and must at least 4 characters ">
+                    <input formControlName="username" (blur)="utils.onBlurForm('username' , 'username' , this.signUpForm)" (input)="utils.onBlurForm('username' , 'username' , this.signUpForm)" class="input100" type="text" name="email" id="username">
+                    <span class="focus-input100"></span>
+                    <span class="label-input100">Username</span>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+                    <input formControlName="email" (blur)="utils.onBlurForm('email' , 'email' , this.signUpForm)" (input)="utils.onBlurForm('email' , 'email' , this.signUpForm)" class="input100" type="text" name="email" id="email">
+                    <span class="focus-input100"></span>
+                    <span class="label-input100">Email</span>
+                </div>
+                
+                <div class="wrap-input100 validate-input" data-validate="Role is required">
+                    <select class="select100" formControlName="role" (blur)="utils.onBlurForm('role' , 'role' , this.signUpForm)" (change)="utils.onBlurForm('role' , 'role' , this.signUpForm)" aria-label="Default select example" id="role">
+                        <option *ngFor="let role of ['','Client' , 'Atelier' , 'Caisse']">{{role}}</option>
+                    </select> 
+                    <span class="focus-input100"></span>
+                    <span class="label-input100">Role</span>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate="Password is required and must at least 4 characters including 1 uppercase, 1 lowercase, 1 number and 1 special character">
+                    <input formControlName="password" (blur)="utils.onBlurForm('password' , 'password' , this.signUpForm)" (input)="utils.onBlurForm('password' , 'password' , this.signUpForm)" [type]="hide ? 'password' : 'text'"  class="input100" type="password" name="pass" id="password">
+                    <span class="focus-input100"></span>
+                    <span class="label-input100">Password</span>
+                    <span class="eye-icon" *ngIf="!hide" (click)="onHidePass(hide)"><i class="fa fa-eye" aria-hidden="true"></i></span>
+                    <span class="eye-slash-icon" *ngIf="hide" (click)="onHidePass(hide)"><i class="fa fa-eye-slash" aria-hidden="true"></i></span>
+                </div>
+
+                <div class="container-login100-form-btn">
+                    <button (click)="utils.onSubmitForm(this.signUpForm , loading , 'Reg')" class="login100-form-btn">
+                        Create My Account
+                    </button>
+                </div>
+                
+                <div class="text-center p-t-46 p-b-20">
+                    <span class="txt2">
+                        You have a acount ?  
+                    </span>
+                    <span><a [routerLink]="['/login']">Login</a></span>
+                </div>
+            </form>
+
+            <div class="login100-more" [ngStyle]="{backgroundImage:  'url(assets/images/reparation-voiture.jpg)' }">
+            </div>
+        </div>
+    </div>
+</div>
