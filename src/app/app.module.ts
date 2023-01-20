@@ -1,3 +1,4 @@
+import { AuthGuard } from './guards/auth.guard';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -15,6 +16,8 @@ import { CarComponent } from './components/home/car/car.component';
 import { HistoryComponent } from './components/home/history/history.component';
 
 import { httpInterceptorProviders } from './helpers/auth.interceptor';
+import { CarDepotComponent } from './components/home/car-depot/car-depot.component';
+import { FormCarComponent } from './components/home/form-car/form-car.component';
 
 
 @NgModule({
@@ -25,7 +28,9 @@ import { httpInterceptorProviders } from './helpers/auth.interceptor';
     SignupComponent,
     RepairComponent,
     CarComponent,
-    HistoryComponent
+    HistoryComponent,
+    CarDepotComponent,
+    FormCarComponent
   ],
   imports: [
     BrowserModule,
@@ -33,10 +38,13 @@ import { httpInterceptorProviders } from './helpers/auth.interceptor';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    BrowserAnimationsModule, // required animations module
+    BrowserAnimationsModule, 
     ToastrModule.forRoot(),
   ],
-  providers: [httpInterceptorProviders],
+  providers: [
+    httpInterceptorProviders,
+    AuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { UtlisService } from 'src/app/services/utlis.service';
 
 @Component({
   selector: 'app-home',
@@ -7,4 +9,11 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
 
+    loading : any = {};
+
+    constructor(private utils : UtlisService) {}
+
+    LogOut(){
+      this.utils.Logout(this.loading);
+    }
 }

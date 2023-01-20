@@ -1,0 +1,21 @@
+select , input , textarea{
+    border: 1px solid #00000030;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+input:focus , select:focus , textarea:focus{
+    box-shadow: 1px 1px 3px 0px #0f48a1bd;
+    border-radius: 4px;
+}
+
+
+/* .content-from-car select{
+    padding: 0px 20px;
+} */
+
+.btn-loading{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
