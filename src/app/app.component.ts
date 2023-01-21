@@ -9,9 +9,7 @@ import { Component , OnInit } from '@angular/core';
 export class AppComponent {
   title = 'GarageAuto-Client-App';
 
-  constructor(private utils : UtlisService){
-    utils.CheckSession();
-  }
+  constructor(private utils : UtlisService){}
 
   public loadScript(url : string) {
     let node = document.createElement('script');

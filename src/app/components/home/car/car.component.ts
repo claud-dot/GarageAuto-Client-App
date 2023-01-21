@@ -2,7 +2,10 @@ import { UtlisService } from './../../../services/utlis.service';
 import { CarService } from './../../../services/car.service';
 import { Component , OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { finalize } from 'rxjs';
+import { UserService } from 'src/app/services/user.service';
+import { FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+
 
 
 @Component({
@@ -11,28 +14,94 @@ import { finalize } from 'rxjs';
   styleUrls: ['./car.component.css']
 })
 export class CarComponent {
-  cars : any[];
-  loading : boolean = false;
+  data : any = {};
+  loading : any = {};
+  headsTab = ['Marque','Modele' , 'Année de Sortie' , 'Date de creation' , 'Date de modification'];
 
-  constructor(private carService : CarService , private utilsService : UtlisService){}
+  constructor(
+    private carService : CarService , 
+    private userService : UserService, 
+    private utilsService : UtlisService ,
+    private router : Router,
+    private utils: UtlisService){}
+
+  YearManufacts(){
+    var yearNow = new Date().getFullYear();
+    
+    var yearBegin = yearNow-100;
+    var listYear : any = [];
+    
+    for (let year = yearNow; year > yearBegin; year--) {
+      listYear.push(year);
+    }
+    return listYear;
+ }
 
   getCars(){
+    this.loading.cars = true;
     const success = (cars : any)=>{
-      this.cars = cars;
-      this.loading = false;
+      cars.years_of_manufacture = this.YearManufacts();
+      this.data.cars = cars;
+      this.loading.cars = false;
     }
 
     const error = (error : HttpErrorResponse)=>{
       this.utilsService.checkStatusErr(error.status);
-      console.log("error : ",error.message);
+      console.log("error cars : ",error.message);
       console.log("status : ",error.status);
+      this.loading.cars = false;
     }
 
     this.carService.getCars().subscribe(success, error);
   }
 
+  getUser_cars(){
+    this.loading.user_cars = true;
+    const success = (user_cars : any)=>{
+      console.log(user_cars);
+      
+      this.data.user_cars = user_cars;
+      this.loading.user_cars = false;
+    }
+
+    const error = (error : HttpErrorResponse)=>{
+      this.utilsService.checkStatusErr(error.status);
+      console.log("error user_cars : ",error.message);
+      console.log("status : ",error.status);
+      this.loading.user_cars = false;
+    }
+
+    this.userService.getUser_cars().subscribe(success, error);
+  }
+
+  onAddCar(formAddCar : FormGroup ){
+    this.loading.add_car = true;
+    delete formAddCar.value.comment;
+    console.log(formAddCar.value);
+     
+    const success = (response : any)=>{
+      this.utils.openToastr(response.message , 'Add car user' , 'success');
+      this.loading.add_car = false;
+      formAddCar.reset();
+      this.getUser_cars();
+    }
+
+    const error = (error : HttpErrorResponse)=>{
+      this.utilsService.checkStatusErr(error.status);
+      this.utils.openToastr(error.error.message, 'Add car user' , 'error');
+      console.log("error add_car : ",error.message);
+      console.log("status : ",error.status);
+      this.loading.add_car = false;
+    }
+    this.userService.addCar_user(formAddCar.value).subscribe(success, error);
+  }
+
+  onDepotCar(carData : any){
+    this.router.navigateByUrl('/home/depot-car' , { state : carData});
+  }
+
   ngOnInit(){
-    this.loading = true;
     this.getCars();
+    this.getUser_cars();
   }
 }
