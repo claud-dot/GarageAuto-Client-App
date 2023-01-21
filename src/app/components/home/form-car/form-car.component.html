@@ -1,0 +1,34 @@
+<div class="content-from-car">
+    <form class="mt-2" [formGroup]="carForm">
+        <div class="form-floating mb-3">
+            <select  class="form-select" id="floatingSelect" formControlName="mark"  (change)="onChangeMarkCar()" aria-label="Default select example">
+                <option *ngIf="!cars.isUser" selected>Marque *</option>
+                <option *ngFor="let car of cars">{{car.mark}}</option>
+            </select>
+            <label for="floatingSelect">Selectionner la marque</label>
+        </div>
+        <div class="form-floating mb-3">
+            <select  class="form-select" id="floatingSelect" formControlName="model" (change)="verifyValueValid()" aria-label="Default select example">
+                <option *ngIf="!cars.isUser" selected>Modele *</option>
+                <option *ngFor="let model of car_models">{{model}}</option>
+            </select>
+            <label for="floatingSelect">Selectionner le model</label>
+        </div>
+        <div class="form-floating mb-3">
+            <select  class="form-select" id="floatingSelect" formControlName="year_of_manufacture" (change)="verifyValueValid()" aria-label="Default select example">
+                <option *ngIf="!cars.isUser" selected>Année de Sortie *</option>
+                <option *ngFor="let year_of_manufacture of cars.years_of_manufacture">{{year_of_manufacture}}</option>
+            </select>
+            <label for="floatingSelect">Selectionner l'année'</label>
+        </div>
+        <div class="form-floating mb-5" *ngIf="typeForm=='depot'">
+            <textarea class="form-control" formControlName="comment" (input)="verifyValueValid()" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+            <label for="floatingTextarea2">Comments</label>
+          </div>
+        <button *ngIf="!loading" [disabled]="!isValid" (click)="onSubmitForm()" type="submit" class="btn btn-primary">Submit</button>
+        <button *ngIf="loading" disabled class="btn btn-primary btn-sm btn-loading">
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            loading...
+        </button>
+    </form>
+</div>

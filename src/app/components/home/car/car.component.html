@@ -1,20 +1,67 @@
-<div  *ngIf="!loading">
-    <h1>Liste de votre voiture voiture</h1>
-    <table class="table">
+<div>
+  <div class="head-car">
+    <h2>Liste de mes voitures</h2>
+    <div class="content-form-search">
+      <form>
+        <div class="search-form">
+          <div class="select-search separate">
+            <select>
+                <option *ngFor="let head of headsTab" >{{head}}</option>
+            </select>
+          </div>
+          <div class="input-search separate" >
+            <input type="text">
+            <i><span class="fa fa-search"></span></i>
+          </div>
+          <div class="btn-search separate">
+            <button class="btn">
+              <i><span class="fa fa-search"></span></i>
+            </button>
+          </div>
+         </div>
+      </form>
+    </div>
+  </div>
+  <div class="scroll-data" >
+    <table class="table table-responsive-md table-hover tab-scroll" >
         <thead>
           <tr>
-            <th scope="col">Marque</th>
-            <th scope="col">Modele</th>
-            <th scope="col">Date de Sortie</th>
+            <th scope="col" *ngFor="let head of headsTab" >{{head}}</th>
+            <th scope="col" colspan="2" >Action</th>
           </tr>
         </thead>
-        <tbody>
-          <tr *ngFor="let car of cars">
-            <td>{{car.car_mark}}</td>
-            <td>{{car.car_model}}</td>
+        <tbody *ngIf="!loading.user_cars">
+          <tr *ngFor="let car of data.user_cars">
+            <td>{{car.mark}}</td>
+            <td>{{car.model}}</td>
             <td>{{car.year_of_manufacture}}</td>
+            <td>{{car.create_at | date | lowercase}}</td>
+            <td>{{car.update_at | date | lowercase}}</td>
+            <td>
+              <button class="btn btn-sm btn-outline-success" (click)="onDepotCar(car)">Deposer</button>
+            </td>
+            <td>
+              <button class="btn btn-sm btn-outline-danger">Supprimer</button>
+            </td>
           </tr>
         </tbody>
-    </table>
+      </table>
+      <div class="grand-spin" *ngIf="loading.user_cars">
+        <div class="spinner-border" role="status"></div>
+      </div>
+  </div>
+  <button class="btn btn-group-sm btn-primary mt-3" data-bs-toggle="collapse" href="#collapsepassvalid" aria-label="Example icon button with a menu icon" aria-expanded="false" aria-controls="collapsepassvalid">
+    Ajouter une voiture
+  </button>
+  <div class="collapse pb-3" id="collapsepassvalid">
+    <div class="add-car row">
+      <h3>Ajout de voiture</h3>
+      <app-form-car *ngIf="!loading.cars" [loading]="loading.add_car" typeForm="addCar" [cars]="data.cars" (onSelected)="onAddCar($event)"></app-form-car>
+      <div class="grand-spin" *ngIf="loading.user_cars">
+        <div class="spinner-border" role="status"></div>
+      </div>
+    </div>
+  </div>
 </div>
+<router-outlet></router-outlet>
 

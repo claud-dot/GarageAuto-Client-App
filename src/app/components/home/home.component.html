@@ -18,6 +18,9 @@
       <li>
         <a [routerLink]="['/home']"><span class="fa fa-paper-plane"></span> Contacts</a>
       </li>
+      <li>
+        <a (click)="LogOut()"><span class="fa fa-sign-out" ></span>Sign Out</a>
+      </li>
     </ul>
     
     <div class="footer">
@@ -30,7 +33,7 @@
     <!-- Page Content  -->
     <div id="content" class="p-4 p-md-5">
     
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
     
         <button type="button" id="sidebarCollapse" class="btn btn-dark">
