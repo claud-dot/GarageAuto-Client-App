@@ -18,21 +18,12 @@ export class UtlisService {
 
   }
 
-  CheckSession(){
-    const curre_session = this.storage.get('USER_KEY');
-    if(curre_session){
-      this.router.navigate(['/home']);
-    }else{
-      this.router.navigate(['/']);
-    }
-  }
-
   Login(userData : any , loading : any){
     loading.login = true;
     const success = (user : any)=>{
       this.storage.store('USER_KEY',user);
       loading.login = false;
-      this.CheckSession();
+      this.router.navigate(['home']);
     }
 
     const error = (error : HttpErrorResponse)=>{
@@ -48,7 +39,7 @@ export class UtlisService {
     const success = (response : any)=>{
       this.openToastr(response.message , 'Signup user' , 'success');
       loading.signup = false;
-      this.router.navigate(['/']);
+      this.router.navigate(['login']);
     }
 
     const error = (error : HttpErrorResponse)=>{
@@ -65,7 +56,7 @@ export class UtlisService {
       this.openToastr(response.message , 'Logout user' , 'success');
       this.checkStatusErr(401);
       loading.logout = false;
-      this.router.navigate(['/']);
+      this.router.navigate(['login']);
     }
 
     const error = (error : HttpErrorResponse)=>{

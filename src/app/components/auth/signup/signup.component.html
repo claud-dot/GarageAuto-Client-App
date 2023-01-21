@@ -35,9 +35,10 @@
                 </div>
 
                 <div class="container-login100-form-btn">
-                    <button (click)="utils.onSubmitForm(this.signUpForm , loading , 'Reg')" class="login100-form-btn">
+                    <button *ngIf="!loading.signup" (click)="utils.onSubmitForm(this.signUpForm , loading , 'Reg')" class="login100-form-btn">
                         Create My Account
                     </button>
+                    <button *ngIf="loading.signup">Loading ...</button>
                 </div>
                 
                 <div class="text-center p-t-46 p-b-20">
