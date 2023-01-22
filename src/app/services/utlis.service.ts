@@ -126,7 +126,10 @@ export class UtlisService {
     }
   }
 
-  onRestForm(formGroup : FormGroup){
-    formGroup.reset();
+
+  onRestForm(formGroup : FormGroup , controlNamesValues : any[]){
+    for (const control of controlNamesValues) {
+      //  formGroup.get(control.name)?.setValue(control.value);
+    }
   }
 }

@@ -5,6 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { UserService } from 'src/app/services/user.service';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { PageEvent } from '@angular/material/paginator';
 
 
 
@@ -17,6 +18,8 @@ export class CarComponent {
   data : any = {};
   loading : any = {};
   headsTab = ['Marque','Modele' , 'Année de Sortie' , 'Date de creation' , 'Date de modification'];
+  metadata : any = {};
+  pagination : any = {page : 1, nbBypage : 5}; 
 
   constructor(
     private carService : CarService , 
@@ -58,8 +61,7 @@ export class CarComponent {
   getUser_cars(){
     this.loading.user_cars = true;
     const success = (user_cars : any)=>{
-      console.log(user_cars);
-      
+      this.metadata = user_cars.metadata[0];
       this.data.user_cars = user_cars;
       this.loading.user_cars = false;
     }
@@ -71,7 +73,7 @@ export class CarComponent {
       this.loading.user_cars = false;
     }
 
-    this.userService.getUser_cars().subscribe(success, error);
+    this.userService.getUser_cars(this.pagination).subscribe(success, error);
   }
 
   onAddCar(formAddCar : FormGroup ){
@@ -94,6 +96,15 @@ export class CarComponent {
       this.loading.add_car = false;
     }
     this.userService.addCar_user(formAddCar.value).subscribe(success, error);
+  }
+
+  onPageChange(event : PageEvent){
+    const startIndex = event.pageIndex * event.pageSize;
+    let endIndex = startIndex + event.pageSize;
+    console.log(startIndex , endIndex, event.length , event.previousPageIndex);
+    this.pagination.nbBypage = endIndex-startIndex;
+    this.pagination.page = endIndex/this.pagination.nbBypage;
+    this.getUser_cars();
   }
 
   onDepotCar(carData : any){

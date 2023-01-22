@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component , OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CarService } from 'src/app/services/car.service';
 import { UserService } from 'src/app/services/user.service';
 import { UtlisService } from 'src/app/services/utlis.service';
@@ -11,18 +11,16 @@ import { UtlisService } from 'src/app/services/utlis.service';
   templateUrl: './car-depot.component.html',
   styleUrls: ['./car-depot.component.css']
 })
-export class CarDepotComponent {
+export class CarDepotComponent implements OnInit {
   loading : any = {};
   cars : any = [];
   dataSendRoute : any;
 
   constructor(
       private carService : CarService , 
-      private userService : UserService, 
       private utilsService : UtlisService ,
-      private router : Router,
-      private utils: UtlisService , ){
-        this.dataSendRoute = this.router.getCurrentNavigation()?.extras.state;
+      private utils: UtlisService){   
+        this.dataSendRoute = window.history.state;
   }
 
   YearManufacts(){
@@ -35,6 +33,14 @@ export class CarDepotComponent {
       listYear.push(year);
     }
     return listYear;
+ }
+
+ isStory(){
+  let i = 0;
+  for (const key in this.dataSendRoute) {
+    i++;
+  }
+  return i>1;
  }
 
   getCars(){
@@ -74,7 +80,7 @@ export class CarDepotComponent {
   }
 
   initData(){
-    if(this.dataSendRoute){
+    if(this.isStory()){
       const dataBuild : any = [
         {
           mark : this.dataSendRoute.mark,

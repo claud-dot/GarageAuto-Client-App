@@ -6,7 +6,7 @@
         <div class="search-form">
           <div class="select-search separate">
             <select>
-                <option *ngFor="let head of headsTab" >{{head}}</option>
+              <option *ngFor="let head of headsTab" >{{head}}</option>
             </select>
           </div>
           <div class="input-search separate" >
@@ -18,41 +18,54 @@
               <i><span class="fa fa-search"></span></i>
             </button>
           </div>
-         </div>
+        </div>
       </form>
     </div>
   </div>
   <div class="scroll-data" >
     <table class="table table-responsive-md table-hover tab-scroll" >
-        <thead>
-          <tr>
-            <th scope="col" *ngFor="let head of headsTab" >{{head}}</th>
-            <th scope="col" colspan="2" >Action</th>
-          </tr>
-        </thead>
-        <tbody *ngIf="!loading.user_cars">
-          <tr *ngFor="let car of data.user_cars">
-            <td>{{car.mark}}</td>
-            <td>{{car.model}}</td>
-            <td>{{car.year_of_manufacture}}</td>
-            <td>{{car.create_at | date | lowercase}}</td>
-            <td>{{car.update_at | date | lowercase}}</td>
-            <td>
-              <button class="btn btn-sm btn-outline-success" (click)="onDepotCar(car)">Deposer</button>
-            </td>
-            <td>
-              <button class="btn btn-sm btn-outline-danger">Supprimer</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="grand-spin" *ngIf="loading.user_cars">
-        <div class="spinner-border" role="status"></div>
-      </div>
+      <thead>
+        <tr>
+          <th scope="col" *ngFor="let head of headsTab" >{{head}}</th>
+          <th scope="col" colspan="3" >Action</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="!loading.user_cars">
+        <tr *ngFor="let car of data.user_cars.data">
+          <td>{{car.mark}}</td>
+          <td>{{car.model}}</td>
+          <td>{{car.year_of_manufacture}}</td>
+          <td>{{car.create_at | date | lowercase}}</td>
+          <td>{{car.update_at | date | lowercase}}</td>
+          <td>
+            <button class="btn btn-sm btn-outline-success" (click)="onDepotCar(car)">Deposer</button>
+          </td>
+          <td>
+            <button class="btn btn-sm btn-outline-info" [routerLink]="['/home/info-car/'+car._id]">Info</button>
+          </td>
+          <td>
+            <button class="btn btn-sm btn-outline-danger">Supprimer</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="grand-spin" *ngIf="loading.user_cars">
+      <!-- <div class="spinner-border" role="status"></div> -->
+      <mat-spinner></mat-spinner>
+    </div>
   </div>
-  <button class="btn btn-group-sm btn-primary mt-3" data-bs-toggle="collapse" href="#collapsepassvalid" aria-label="Example icon button with a menu icon" aria-expanded="false" aria-controls="collapsepassvalid">
-    Ajouter une voiture
-  </button>
+  <div class="footer-tab">
+    <button class="btn btn-group-sm btn-primary mt-3" data-bs-toggle="collapse" href="#collapsepassvalid" aria-label="Example icon button with a menu icon" aria-expanded="false" aria-controls="collapsepassvalid">
+      Ajouter une voiture
+    </button>
+    <mat-paginator  
+                [length]="metadata.total"
+                [pageSize]="pagination.nbBypage"
+                [pageSizeOptions]="[5, 10]"
+                (page)="onPageChange($event)"
+                aria-label="Select page">
+    </mat-paginator>
+  </div>
   <div class="collapse pb-3" id="collapsepassvalid">
     <div class="add-car row">
       <h3>Ajout de voiture</h3>

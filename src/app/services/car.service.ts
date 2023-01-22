@@ -19,4 +19,10 @@ export class CarService {
     return this.http.post(environment.nodeApi_url+'/car/repair',dataRepair , {withCredentials : true});
   }
 
+
+  getUserCarRepair(dataPage : any){
+    const user =this.storage.get('USER_KEY');
+    return this.http.get(environment.nodeApi_url+'/car/user/repair/'+user.id+'/'+dataPage.page+'/'+dataPage.nbBypage, {withCredentials : true})
+  }
+
 }

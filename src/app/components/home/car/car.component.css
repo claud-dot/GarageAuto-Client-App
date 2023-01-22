@@ -4,20 +4,13 @@
     justify-content: space-between;
 }
 
-.grand-spin{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: inherit;
-}
-
 .content-tab{
     height: 274px;
     overflow-y: scroll;
 }
 
 .scroll-data{
-    height: 260px;
+    height: 380px;;
     width: 100%;
    -layout: fixed;
    overflow-y: scroll;
@@ -119,5 +112,10 @@ select , input{
 
 .add-car{
     padding-top: 50px;
+}
+
+.footer-tab{
+    display: flex;
+    justify-content: space-between;
 }
 
