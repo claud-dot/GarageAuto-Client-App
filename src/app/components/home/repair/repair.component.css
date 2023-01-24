@@ -1,0 +1,151 @@
+/* body{margin-top:20px;
+    background:#eee;
+    } */
+    
+    .card {
+        box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%);
+        border-radius: 20px !important;
+    }
+
+    
+    
+    .width-90 {
+        width: 90px!important;
+    }
+    .rounded-3 {
+        border-radius: 0.5rem !important;
+    }
+    
+    a {
+    text-decoration:none;    
+    }
+
+    .list-reparation{
+        margin-top: 20px;
+    }
+
+    .head-card{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .status-text {
+        font-size: inherit;
+        color: rgba(0, 195, 255, 0.925);
+    }
+
+    .avancement-text{
+        display: flex;
+        justify-content: space-between;
+        width: 146px;
+        padding-right: 0;
+    }
+
+    .other-car-detail{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .btn-recupere{
+        display: flex;
+        align-items: center;
+    }
+
+    .btn-recupere button{
+        background-color: #3d3e40;
+        color: white;
+    }
+
+    .content-head{
+        position: sticky;
+        top: 76px;
+        z-index: 1;
+    }
+
+    .content-form-search{
+        display: flex;
+        justify-content: space-between;
+        background-color: #fafafa;
+        border-radius: 8px;
+        padding: 16px; 
+        align-items: center;
+        box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%);
+    }
+
+    .search-form{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    
+    .input-search{
+        position: relative;
+    }
+    
+    .input-search input{
+        padding: 4px 10px 4px 28px;
+        width: 235px;
+    }
+    
+    input:focus , select:focus{
+        box-shadow: 1px 1px 3px 0px #0f48a1bd;
+        border-radius: 4px;
+    }
+    
+    .input-search i{
+        position: absolute;
+        left: 18px;
+        top: 30px;
+    }
+    
+    .select-search{
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .select-search select{
+        /* width: 145px; */
+        padding: 5px 5px;
+        outline: none;
+    }
+    
+    select , input{
+        border: 1px solid #00000030;
+        border-radius: 8px;
+        font-size: 13px;
+    }
+    
+    .separate{
+        padding: 0 10px;
+    }
+    
+    .btn-search{
+        padding: 0;
+    }
+    
+    .btn-search button{
+        background-color: #3d3e40;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        color: white;
+    }
+    
+    .btn-search button:active i{
+        color: rgba(255, 255, 255, 0.742);
+    }
+    
+    .add-car{
+        padding-top: 50px;
+    }
+    
+    .footer-tab{
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .input-date input{
+        padding: 2px 8px;
+        margin-right: 6px;
+        width: 235px;
+    }

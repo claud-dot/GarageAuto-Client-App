@@ -3,28 +3,65 @@ import { CarService } from './../../../services/car.service';
 import { Component , OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { UserService } from 'src/app/services/user.service';
-import { FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { PageEvent } from '@angular/material/paginator';
+import { debounceTime, Subscription } from 'rxjs';
 
-
+declare var $: any;
 
 @Component({
   selector: 'app-car',
   templateUrl: './car.component.html',
   styleUrls: ['./car.component.css']
 })
-export class CarComponent {
+export class CarComponent implements OnInit {
+  
+  formSearch : FormGroup;
+  formCtrlSub : Subscription;
   data : any = {};
   loading : any = {};
-  headsTab = ['Marque','Modele' , 'Année de Sortie' , 'Date de creation' , 'Date de modification'];
+  headsTab = [
+    { name: 'Marque', value:'mark'},
+    { name: 'Modele' , value:'model'},
+    { name:  'Date de reparation' , value:'create_at'},
+    { name:  'Date de modification' , value : 'update_at'}
+  ];
+  
+  metadata : any = {};
+  dataCar : any = {page : 1, nbBypage : 5}; 
 
   constructor(
+    private build: FormBuilder,
     private carService : CarService , 
     private userService : UserService, 
     private utilsService : UtlisService ,
     private router : Router,
     private utils: UtlisService){}
+  
+  initForm(){
+    this.formSearch = this.build.group({
+      filter : new FormControl(null),
+      text : new FormControl(null),
+      dates : this.build.array([])
+    });
+    this.initDateInter();
+  }
 
+  get dates(): FormArray {
+		return this.formSearch.get('dates') as FormArray;
+	}
+
+  initDateInter(){
+    const formArray = this.dates;
+    if(formArray){
+      formArray.push(this.build.group({
+        start : new FormControl(''),
+        end : new FormControl(''),
+      }))
+    }
+  }
+  
   YearManufacts(){
     var yearNow = new Date().getFullYear();
     
@@ -58,8 +95,7 @@ export class CarComponent {
   getUser_cars(){
     this.loading.user_cars = true;
     const success = (user_cars : any)=>{
-      console.log(user_cars);
-      
+      this.metadata = user_cars.metadata[0];
       this.data.user_cars = user_cars;
       this.loading.user_cars = false;
     }
@@ -71,13 +107,12 @@ export class CarComponent {
       this.loading.user_cars = false;
     }
 
-    this.userService.getUser_cars().subscribe(success, error);
+    this.userService.getUser_cars(this.dataCar).subscribe(success, error);
   }
 
   onAddCar(formAddCar : FormGroup ){
     this.loading.add_car = true;
     delete formAddCar.value.comment;
-    console.log(formAddCar.value);
      
     const success = (response : any)=>{
       this.utils.openToastr(response.message , 'Add car user' , 'success');
@@ -96,11 +131,38 @@ export class CarComponent {
     this.userService.addCar_user(formAddCar.value).subscribe(success, error);
   }
 
+  onPageChange(event : PageEvent){
+    const startIndex = event.pageIndex * event.pageSize;
+    let endIndex = startIndex + event.pageSize;
+    this.dataCar.nbBypage = endIndex-startIndex;
+    this.dataCar.page = endIndex/this.dataCar.nbBypage;
+    this.getUser_cars();
+  }
+
+  ngAfterContentInit() {
+    this.formCtrlSub = this.formSearch.valueChanges
+    .pipe(debounceTime(500))
+    .subscribe(value => {
+        if(!this.formSearch.value['filter']?.includes('_at') && this.formSearch.value['text']!=null){
+          this.dataCar.search = value;
+          this.getUser_cars();
+        }else if(this.utils.isDateValue(value) && this.formSearch.value['filter']?.includes('_at')){
+          this.dataCar.search = value;
+          this.getUser_cars();
+        }
+      });
+  }
+
+  scrollTo(section : string){
+    document.querySelector("#"+section)?.scrollIntoView();
+  }
+
   onDepotCar(carData : any){
     this.router.navigateByUrl('/home/depot-car' , { state : carData});
   }
 
   ngOnInit(){
+    this.initForm();
     this.getCars();
     this.getUser_cars();
   }
