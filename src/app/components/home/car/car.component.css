@@ -4,20 +4,13 @@
     justify-content: space-between;
 }
 
-.grand-spin{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: inherit;
-}
-
 .content-tab{
     height: 274px;
     overflow-y: scroll;
 }
 
 .scroll-data{
-    height: 260px;
+    height: 380px;;
     width: 100%;
    -layout: fixed;
    overflow-y: scroll;
@@ -77,12 +70,12 @@ input:focus , select:focus{
 .input-search i{
     position: absolute;
     left: 18px;
-    top: 6px;
+    top: 30px;
 }
 
 .select-search{
     display: flex;
-    align-items: center;
+    flex-direction: column;
 }
 
 .select-search select{
@@ -121,3 +114,13 @@ select , input{
     padding-top: 50px;
 }
 
+.footer-tab{
+    display: flex;
+    justify-content: space-between;
+}
+
+.input-date input{
+    padding: 2px 8px;
+    margin-right: 6px;
+    width: 133px;
+}
