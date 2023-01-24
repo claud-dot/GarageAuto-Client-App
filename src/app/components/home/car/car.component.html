@@ -2,21 +2,25 @@
   <div class="head-car">
     <h2>Liste de mes voitures</h2>
     <div class="content-form-search">
-      <form>
+      <form [formGroup]="formSearch">
         <div class="search-form">
-          <div class="select-search separate">
-            <select>
-              <option *ngFor="let head of headsTab" >{{head}}</option>
+          <div class="select-search separate mb-3">
+            <label for="filtre">Filtre</label>
+            <select formControlName="filter">
+              <option *ngFor="let head of headsTab;"  [value]="head.value" >{{head.name}}</option>
             </select>
           </div>
-          <div class="input-search separate" >
-            <input type="text">
+          <div class="input-search separate mb-3" *ngIf="!formSearch.value['filter']?.includes('creat') && !formSearch.value['filter']?.includes('update')">
+            <label for="filtre">Text</label>
+            <input type="text" formControlName="text" >
             <i><span class="fa fa-search"></span></i>
           </div>
-          <div class="btn-search separate">
-            <button class="btn">
-              <i><span class="fa fa-search"></span></i>
-            </button>
+          <div class="input-date separate mb-3" formArrayName="dates" *ngIf="formSearch.value['filter']?.includes('creat') ||formSearch.value['filter']?.includes('update')">
+            <label for="filtre">Date</label>
+            <div [formGroupName]="0" *ngFor="let date of dates.controls">
+              <input  #start (focus)="start.type='date'" type="text" formControlName="start"/>
+              <input #end type="text" (focus)="end.type='date'" formControlName="end"/>
+            </div>
           </div>
         </div>
       </form>
@@ -26,7 +30,11 @@
     <table class="table table-responsive-md table-hover tab-scroll" >
       <thead>
         <tr>
-          <th scope="col" *ngFor="let head of headsTab" >{{head}}</th>
+          <th scope="col">Marque</th>
+          <th scope="col">Modele</th>
+          <th scope="col">Année de fabrication</th>
+          <th scope="col">Date de création</th>
+          <th scope="col">Date de modification</th>
           <th scope="col" colspan="3" >Action</th>
         </tr>
       </thead>
@@ -55,12 +63,12 @@
     </div>
   </div>
   <div class="footer-tab">
-    <button class="btn btn-group-sm btn-primary mt-3" data-bs-toggle="collapse" href="#collapsepassvalid" aria-label="Example icon button with a menu icon" aria-expanded="false" aria-controls="collapsepassvalid">
+    <button class="btn btn-group-sm btn-primary mt-3" (click)="scrollTo('collapsepassvalid')" data-bs-toggle="collapse" href="#collapsepassvalid" aria-label="Example icon button with a menu icon" aria-expanded="false" aria-controls="collapsepassvalid">
       Ajouter une voiture
     </button>
-    <mat-paginator  
+    <mat-paginator *ngIf="metadata" 
                 [length]="metadata.total"
-                [pageSize]="pagination.nbBypage"
+                [pageSize]="dataCar.nbBypage"
                 [pageSizeOptions]="[5, 10]"
                 (page)="onPageChange($event)"
                 aria-label="Select page">

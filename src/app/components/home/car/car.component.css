@@ -70,12 +70,12 @@ input:focus , select:focus{
 .input-search i{
     position: absolute;
     left: 18px;
-    top: 6px;
+    top: 30px;
 }
 
 .select-search{
     display: flex;
-    align-items: center;
+    flex-direction: column;
 }
 
 .select-search select{
@@ -119,3 +119,8 @@ select , input{
     justify-content: space-between;
 }
 
+.input-date input{
+    padding: 2px 8px;
+    margin-right: 6px;
+    width: 133px;
+}

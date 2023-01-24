@@ -1,6 +1,36 @@
 <!-- <div class="container"> -->
     <div class="row content-reparation">
-        <h2>Liste des reparations </h2>
+        <div class="content-head">
+            <div class="content-form-search">
+                <h2>Liste des reparations </h2>
+                <form [formGroup]="formSearch">
+                    <div class="search-form">
+                        <div class="select-search separate mb-3">
+                            <label for="filtre">Status</label>
+                            <select formControlName="filterStatus">
+                                <option value="null">Tous *</option>
+                                <option *ngFor="let statut of status;"  [value]="statut.value" >{{statut.name}}</option>
+                            </select>
+                        </div>
+                        <div class="select-search separate mb-3">
+                            <label for="filtre">Voiture</label>
+                            <select formControlName="filterCar">
+                                <option *ngFor="let head of headsTab;"  [value]="head.value" >{{head.name}}</option>
+                            </select>
+                        </div>
+                        <div class="input-search separate mb-3" *ngIf="!formSearch.value['filterCar']?.includes('_at')">
+                            <label for="filtre">Text</label>
+                            <input type="text" formControlName="text" >
+                            <i><span class="fa fa-search"></span></i>
+                        </div>
+                        <div class="input-date separate mb-3" *ngIf="formSearch.value['filterCar']?.includes('_at')">
+                            <label for="filtre">Date</label>
+                            <input  #date (focus)="date.type='date'" type="text" formControlName="date"/>
+                        </div>
+                    </div>
+                    </form>
+            </div>
+        </div>
         <div class="grand-spin" *ngIf="loading.cars_repair">
             <div class="spinner-border" role="status"></div>
           </div>
@@ -57,9 +87,9 @@
                 </div>
             </div>
         </div>
-        <mat-paginator  
+        <mat-paginator *ngIf="metadata"
                 [length]="metadata.total"
-                [pageSize]="pagination.nbBypage"
+                [pageSize]="dataRepair.nbBypage"
                 [pageSizeOptions]="[5, 10]"
                 (page)="onPageChange($event)"
                 aria-label="Select page">

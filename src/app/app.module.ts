@@ -1,5 +1,6 @@
-import { AuthGuard } from './guards/auth.guard';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import * as fr from '@angular/common/locales/fr';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
@@ -44,8 +45,12 @@ import { InfoCarComponent } from './components/home/info-car/info-car.component'
   ],
   providers: [
     httpInterceptorProviders,
-    AuthGuard
+    { provide: LOCALE_ID, useValue: 'fr-FR'}
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor() {
+    registerLocaleData(fr.default);
+  }
+}

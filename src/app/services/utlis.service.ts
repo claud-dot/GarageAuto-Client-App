@@ -132,4 +132,23 @@ export class UtlisService {
       //  formGroup.get(control.name)?.setValue(control.value);
     }
   }
+
+  
+  isDateValue(data : any){
+    if(data.dates[0].start!='' && data.dates[0].end!=''){
+      const start = new Date(data.dates[0].start);
+      const end = new Date(data.dates[0].end);
+      if (start < end) {
+        data.text = null;
+        return true;
+      }
+      return false;
+    }else if(data.dates[0].start!='' && data.dates[0].end==''){
+      data.text = null;
+      return true;
+    }else if(data.dates[0].start=='' && data.dates[0].end!=''){
+      return false
+    }
+    return false;
+  }
 }
