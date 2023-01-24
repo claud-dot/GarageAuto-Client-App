@@ -1,6 +1,5 @@
 import { CarDepotComponent } from './components/home/car-depot/car-depot.component';
 import { RepairComponent } from './components/home/repair/repair.component';
-import { HistoryComponent } from './components/home/history/history.component';
 import { CarComponent } from './components/home/car/car.component';
 import { HomeComponent } from './components/home/home.component';
 import { AppComponent } from './app.component';
@@ -10,7 +9,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard, IsSignedInGuard } from './guards/auth.guard';
 import { ClientGuard } from './guards/role.guard';
-import { ClildGuard } from './guards/clild.guard';
+import { InfoCarComponent } from './components/home/info-car/info-car.component';
 
 const routes: Routes = [
   { path: '' , redirectTo :'/login' , pathMatch : 'full' },
@@ -24,21 +23,22 @@ const routes: Routes = [
       {
         path : '',
         component : CarComponent,
+        canActivate :[ClientGuard,AuthGuard]
       },
       {
         path : 'depot-car',
         component : CarDepotComponent,
-        canActivate : [ClientGuard]
+        canActivate : [ClientGuard,AuthGuard]
       },
       {
-        path : 'history',
-        component : HistoryComponent,
-        canActivate : [ClientGuard]
+        path : 'info-car/:id_car',
+        component : InfoCarComponent,
+        canActivate : [ClientGuard,AuthGuard]
       },
       {
         path : 'repair',
         component : RepairComponent,
-        canActivate : [ClientGuard]
+        canActivate : [ClientGuard,AuthGuard]
       }
     ]
   },

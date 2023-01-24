@@ -14,9 +14,10 @@ export class UserService {
     return this.http.get(environment.nodeApi_url+'/user_roles' , {withCredentials : true});
   }
 
-  getUser_cars(){
+  getUser_cars(data : any){
     const user =this.storage.get('USER_KEY');
-    return this.http.get(environment.nodeApi_url+'/user/cars/'+user.id, {withCredentials : true})
+    data = {user_id : user.id , ...data};
+    return this.http.get(environment.nodeApi_url+'/user/cars/'+JSON.stringify(data), {withCredentials : true})
   }
 
   addCar_user(dataCar : any){
