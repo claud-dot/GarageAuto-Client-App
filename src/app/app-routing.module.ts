@@ -8,9 +8,13 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard, IsSignedInGuard } from './guards/auth.guard';
-import { ClientGuard } from './guards/role.guard';
+import { ClientGuard, FinancierGuard } from './guards/role.guard';
 import { InfoCarComponent } from './components/home/info-car/info-car.component';
 import { InoviceComponent } from './components/home/inovice/inovice.component';
+import { PaymentConfirmationComponent } from './components/home/financier/payment-confirmation/payment-confirmation.component';
+import { StatisticComponent } from './components/home/financier/statistic/statistic.component';
+import { DeniedAccessComponent } from './error-page/denied-access/denied-access.component';
+import { InvoiceGuard } from './guards/other.guard';
 
 const routes: Routes = [
   { path: '' , redirectTo :'/login' , pathMatch : 'full' },
@@ -42,10 +46,25 @@ const routes: Routes = [
         canActivate : [ClientGuard,AuthGuard]
       },
       {
-        path : 'inovice/:id_repair',
-        component : InoviceComponent
+        path : 'invoice/:id_repair',
+        component : InoviceComponent,
+        canActivate : [InvoiceGuard,AuthGuard]
+      },
+      {
+        path : 'financier',
+        component : PaymentConfirmationComponent,
+        canActivate : [FinancierGuard , AuthGuard],
+      },
+      {
+        path : 'statistique',
+        component : StatisticComponent,
+        canActivate : [FinancierGuard , AuthGuard]
       }
     ]
+  },
+  {
+    path : 'error-page',
+    component : DeniedAccessComponent
   },
   {
     path: '**',

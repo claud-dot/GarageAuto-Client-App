@@ -1,11 +1,13 @@
 <div class="limiter">
     <div class="container-login100">
-        <div class="wrap-login100 ">
-            <form *ngIf="!loading.role" [formGroup]="loginForm" class="login100-form validate-form">
+        <div class="grand-spin" *ngIf="loading.role">
+            <mat-spinner></mat-spinner>
+        </div>
+        <div class="wrap-login100 " *ngIf="!loading.role">
+            <form [formGroup]="loginForm" class="login100-form validate-form">
                 <span class="login100-form-title p-b-43">
                     Login to continue
                 </span>
-                
                 
                 <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
                     <input formControlName="email" (blur)="utils.onBlurForm('email' , 'email' , this.loginForm)" class="input100" type="text" name="email" id="email">
@@ -15,7 +17,7 @@
                 
                 <div class="wrap-input100 validate-input" data-validate="Role is required">
                     <select class="select100" formControlName="role" (blur)="utils.onBlurForm('role' , 'role' , this.loginForm)" (change)="utils.onBlurForm('role' , 'role' , this.loginForm)" aria-label="Default select example" id="role">
-                        <option *ngFor="let role of ['','Client' , 'Atelier' , 'Caisse']">{{role}}</option>
+                        <option *ngFor="let role of user_roles">{{role.role}}</option>
                     </select> 
                     <span class="focus-input100"></span>
                     <span class="label-input100">Role</span>
@@ -28,22 +30,6 @@
                     <span class="eye-icon" *ngIf="!hide" (click)="onHidePass(hide)"><i class="fa fa-eye" aria-hidden="true"></i></span>
                     <span class="eye-slash-icon" *ngIf="hide" (click)="onHidePass(hide)"><i class="fa fa-eye-slash" aria-hidden="true"></i></span>
                 </div>
-
-                <!-- <div class="flex-sb-m w-full p-t-3 p-b-32">
-                    <div class="contact100-form-checkbox">
-                        <input formControlName="remember" class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-                        <label class="label-checkbox100" for="ckb1">
-                            Remember me
-                        </label>
-                    </div>
-
-                    <div>
-                        <a href="#" class="txt1">
-                            Forgot Password?
-                        </a>
-                    </div>
-                </div> -->
-        
 
                 <div class="container-login100-form-btn">
                     <button *ngIf="!loading.login" (click)="utils.onSubmitForm(this.loginForm , loading)" class="login100-form-btn">

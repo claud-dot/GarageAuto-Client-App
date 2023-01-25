@@ -1,6 +1,8 @@
 import { UtlisService } from './../../../services/utlis.service';
 import { Component , OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UserService } from 'src/app/services/user.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-signup',
@@ -12,10 +14,10 @@ export class SignupComponent {
   signUpForm !: FormGroup;
   hide : any = [];
   loading : any = {};
-  user_role : any = {};
+  user_role : any;
   utils : any;
 
-  constructor(private formbuild : FormBuilder , private utilService : UtlisService){
+  constructor(private formbuild : FormBuilder , private utilService : UtlisService , private userService : UserService){
     this.utils = utilService;
   }
 
@@ -47,7 +49,23 @@ export class SignupComponent {
       this.hide.confirm = true;
   }
 
+  getRoles(){
+    this.loading.role = true;
+    const success = (roles : any)=>{
+      this.user_role = roles;
+      this.loading.role = false;
+    }
+
+    const error = (err : HttpErrorResponse)=>{
+      this.utils.openToastr(err.error.message , "Role user" , 'error');
+      console.log("roles "+err.error.message);
+      this.loading.role = false;
+    }
+    this.userService.getUser_roles().subscribe(success,error);
+  }
+
   ngOnInit(){
+    this.getRoles();
     this.initHide();
     this.initForm();
   }

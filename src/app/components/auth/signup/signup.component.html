@@ -1,7 +1,10 @@
 <div class="limiter">
-    <div class="container-login100">
-        <div class="wrap-login100 ">
-            <form *ngIf="!loading.role" [formGroup]="signUpForm" class="login100-form validate-form">
+    <div class="container-login100" >
+        <div class="grand-spin" *ngIf="loading.role">
+            <mat-spinner></mat-spinner>
+        </div>
+        <div class="wrap-login100 " *ngIf="!loading.role">
+            <form [formGroup]="signUpForm" class="login100-form validate-form">
                 <span class="login100-form-title p-b-43">
                     Sign Up
                 </span>
@@ -20,7 +23,7 @@
                 
                 <div class="wrap-input100 validate-input" data-validate="Role is required">
                     <select class="select100" formControlName="role" (blur)="utils.onBlurForm('role' , 'role' , this.signUpForm)" (change)="utils.onBlurForm('role' , 'role' , this.signUpForm)" aria-label="Default select example" id="role">
-                        <option *ngFor="let role of ['','Client' , 'Atelier' , 'Caisse']">{{role}}</option>
+                        <option *ngFor="let role of user_role">{{role.role}}</option>
                     </select> 
                     <span class="focus-input100"></span>
                     <span class="label-input100">Role</span>

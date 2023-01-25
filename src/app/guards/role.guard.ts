@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 
@@ -8,7 +8,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class ClientGuard implements CanActivate {
 
-  constructor(private authService : AuthService) {}
+  constructor(private authService : AuthService , private router:Router) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -16,6 +16,7 @@ export class ClientGuard implements CanActivate {
     if(this.authService.RoleAccess()==='Client'){
       return true;
     }else{
+      this.router.navigate(['error-page']);
       return false;
     }
   } 
@@ -27,12 +28,13 @@ export class ClientGuard implements CanActivate {
 })
 export class AtelierGuard implements CanActivate{
 
-  constructor(private authService : AuthService) {}
+  constructor(private authService : AuthService , private router:Router) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     if(this.authService.RoleAccess()==='Responsable Atelier'){
       return true;
     }else{
+      this.router.navigate(['error-page']);
       return false;
     }
   }
@@ -43,12 +45,13 @@ export class AtelierGuard implements CanActivate{
 })
 export class FinancierGuard implements CanActivate{
 
-  constructor(private authService : AuthService) {}
+  constructor(private authService : AuthService , private router:Router) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     if(this.authService.RoleAccess()==='Responsable Financier'){
       return true;
     }else{
+      this.router.navigate(['error-page']);
       return false;
     }
   }
