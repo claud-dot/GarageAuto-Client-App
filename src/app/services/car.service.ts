@@ -23,7 +23,6 @@ export class CarService {
     return this.http.post(environment.nodeApi_url+'/car/repair',dataRepair , {withCredentials : true});
   }
 
-
   getUserCarRepair(data : any){
     const user =this.storage.get('USER_KEY');
     data = { user_id : user.id , ...data};
@@ -34,6 +33,11 @@ export class CarService {
     const user = this.storage.get('USER_KEY');
     data = {user_id : user.id , ...data};
     return this.http.get(environment.nodeApi_url+'/car/user/repair/story/'+JSON.stringify(data) , { withCredentials : true });
+  }
+
+  //Financier requette
+  getPayementRepair(data : any){
+    return this.http.get(environment.nodeApi_url+'/repair/payment/'+JSON.stringify(data) , { withCredentials : true });
   }
 
 }

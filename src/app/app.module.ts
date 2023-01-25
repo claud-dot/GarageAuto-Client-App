@@ -20,6 +20,9 @@ import { CarDepotComponent } from './components/home/car-depot/car-depot.compone
 import { FormCarComponent } from './components/home/form-car/form-car.component';
 import { InfoCarComponent } from './components/home/info-car/info-car.component';
 import { InoviceComponent } from './components/home/inovice/inovice.component';
+import { PaymentConfirmationComponent } from './components/home/financier/payment-confirmation/payment-confirmation.component';
+import { StatisticComponent } from './components/home/financier/statistic/statistic.component';
+import { DeniedAccessComponent } from './error-page/denied-access/denied-access.component';
 
 
 @NgModule({
@@ -33,7 +36,10 @@ import { InoviceComponent } from './components/home/inovice/inovice.component';
     CarDepotComponent,
     FormCarComponent,
     InfoCarComponent,
-    InoviceComponent
+    InoviceComponent,
+    PaymentConfirmationComponent,
+    StatisticComponent,
+    DeniedAccessComponent
   ],
   imports: [
     BrowserModule,

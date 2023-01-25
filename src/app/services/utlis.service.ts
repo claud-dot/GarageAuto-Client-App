@@ -23,7 +23,13 @@ export class UtlisService {
     const success = (user : any)=>{
       this.storage.store('USER_KEY',user);
       loading.login = false;
-      this.router.navigate(['home']);
+      if(user.role==='Responsable Financier'){
+        this.router.navigate(['home/financier']);
+      }else if(user.role==='Responsable Atelier'){
+        this.router.navigate(['home/atelier']);
+      }else if(user.role==='Client'){
+        this.router.navigate(['home']);
+      }
     }
 
     const error = (error : HttpErrorResponse)=>{
@@ -123,13 +129,6 @@ export class UtlisService {
       this.toastr.success(message,title,{
         timeOut : 5000
       });
-    }
-  }
-
-
-  onRestForm(formGroup : FormGroup , controlNamesValues : any[]){
-    for (const control of controlNamesValues) {
-      //  formGroup.get(control.name)?.setValue(control.value);
     }
   }
 

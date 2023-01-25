@@ -20,7 +20,7 @@ export class AppComponent {
 
   ngOnInit(){
     this.loadScript("assets/js/main.js");
-    this.loadScript("assets/js/popper.js")
+    this.loadScript("assets/js/popper.js");
   }
 
 }

@@ -62,9 +62,9 @@
                                     </span>
                                 </div>
                                 <div class="btn-recupere">
-                                    <a [routerLink]="['/home/inovice/'+repair._id]">
+                                    <a *ngIf="repair.isFactured" [routerLink]="['/home/invoice/'+repair._id]">
                                         <i class="fa fa-file-text" aria-hidden="true"></i>
-                                        <span class="badge badge-danger">!</span>
+                                        <!-- <span class="badge badge-danger">!</span> -->
                                     </a>
                                     <button class="btn btn-sm" [disabled]="repair.status == 0">Recuperé</button>
                                 </div>
