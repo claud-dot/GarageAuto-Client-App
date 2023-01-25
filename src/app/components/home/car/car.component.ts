@@ -154,7 +154,7 @@ export class CarComponent implements OnInit {
   }
 
   scrollTo(section : string){
-    document.querySelector("#"+section)?.scrollIntoView();
+    document.querySelector("#"+section)?.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
   }
 
   onDepotCar(carData : any){
