@@ -1,0 +1,49 @@
+<div class="row">
+    <div class="col-3 mx-auto">
+        <h1>Facture</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-3">
+        <input [(ngModel)]="newRowValue">
+    </div>
+    <div class="col-3">
+        <button (click)="addRow()">Add Row</button>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-12">
+        <table class="table table-primary table-striped" [ngStyle]="tableStyles">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Déscription</th>
+                    <th scope="col">Quantité</th>
+                    <th scope="col">Prix Unitaire</th>
+                    <th scope="col">Prix Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

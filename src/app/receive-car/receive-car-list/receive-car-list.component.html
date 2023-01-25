@@ -1,0 +1,22 @@
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Client</th>
+        <th scope="col">Date</th>
+        <th scope="col">Voiture</th>
+        <th scope="col">Modèle</th>
+        <th scope="col">Déscription</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let repair of repairs">
+        <th>{{repair.user_car.user_id}}</th>
+        <td>{{repair.create_at}}</td>
+        <td>{{repair.user_car.mark}}</td>
+        <td>{{repair.user_car.model}}</td>
+        <td>{{repair.comment}}</td>
+        <td><button type="button" (click)="navigateToInvoice()" class="btn btn-outline-success">Facture</button></td>
+      </tr>
+    </tbody>
+  </table>

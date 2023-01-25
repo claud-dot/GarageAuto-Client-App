@@ -1,3 +1,5 @@
+import { AuthGuard } from './guards/auth.guard';
+import { NgModule } from '@angular/core';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import * as fr from '@angular/common/locales/fr';
@@ -9,12 +11,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { MaterialModule } from './material/material.module';
 
+import{ReceiveCarModule} from './receive-car/receive-car.module';
+import {ReceiveCarRoutingModule} from './receive-car/receive-car-routing.module';
+
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
 import { RepairComponent } from './components/home/repair/repair.component';
 import { CarComponent } from './components/home/car/car.component';
+import { HistoryComponent } from './components/home/history/history.component';
+
 import { httpInterceptorProviders } from './helpers/auth.interceptor';
 import { CarDepotComponent } from './components/home/car-depot/car-depot.component';
 import { FormCarComponent } from './components/home/form-car/form-car.component';
@@ -33,13 +40,16 @@ import { DeniedAccessComponent } from './error-page/denied-access/denied-access.
     SignupComponent,
     RepairComponent,
     CarComponent,
+    HistoryComponent,
     CarDepotComponent,
     FormCarComponent,
     InfoCarComponent,
     InoviceComponent,
     PaymentConfirmationComponent,
     StatisticComponent,
-    DeniedAccessComponent
+    DeniedAccessComponent,
+    InoviceComponent,
+    FormCarComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +60,8 @@ import { DeniedAccessComponent } from './error-page/denied-access/denied-access.
     BrowserAnimationsModule, 
     ToastrModule.forRoot(),
     MaterialModule
+    ReceiveCarModule,
+    ReceiveCarRoutingModule
   ],
   providers: [
     httpInterceptorProviders,

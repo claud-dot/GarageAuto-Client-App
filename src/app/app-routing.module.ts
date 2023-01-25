@@ -5,6 +5,8 @@ import { HomeComponent } from './components/home/home.component';
 import { AppComponent } from './app.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
 import { LoginComponent } from './components/auth/login/login.component';
+import {ReceiveCarListComponent} from '../app/receive-car/receive-car-list/receive-car-list.component';
+import {InvoiceComponent} from '../app/receive-car/invoice/invoice.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard, IsSignedInGuard } from './guards/auth.guard';
@@ -17,14 +19,14 @@ import { DeniedAccessComponent } from './error-page/denied-access/denied-access.
 import { InvoiceGuard } from './guards/other.guard';
 
 const routes: Routes = [
-  { path: '' , redirectTo :'/login' , pathMatch : 'full' },
-  { path : 'login', component : LoginComponent , canActivate : [IsSignedInGuard] },
-  { path : 'signup' , component : SignupComponent , canActivate : [IsSignedInGuard] },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent, canActivate: [IsSignedInGuard] },
+  { path: 'signup', component: SignupComponent, canActivate: [IsSignedInGuard] },
   {
-    path : 'home',
-    component : HomeComponent,
-    canActivate : [AuthGuard],
-    children : [
+    path: 'home',
+    component: HomeComponent,
+    canActivate: [AuthGuard],
+    children: [
       {
         path : '',
         component : CarComponent,
@@ -59,7 +61,15 @@ const routes: Routes = [
         path : 'statistique',
         component : StatisticComponent,
         canActivate : [FinancierGuard , AuthGuard]
-      }
+      },
+      {
+        path: 'receiveCar',
+        component: ReceiveCarListComponent,
+      },
+      {
+        path:'invoice/create',
+        component:InvoiceComponent
+       }
     ]
   },
   {
@@ -73,7 +83,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes , {scrollPositionRestoration: 'enabled'})],
+  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { } 
