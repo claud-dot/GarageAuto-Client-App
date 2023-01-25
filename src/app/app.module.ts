@@ -7,6 +7,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 
+import{ReceiveCarModule} from './receive-car/receive-car.module';
+import {ReceiveCarRoutingModule} from './receive-car/receive-car-routing.module';
+
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/auth/login/login.component';
@@ -40,6 +43,8 @@ import { FormCarComponent } from './components/home/form-car/form-car.component'
     HttpClientModule,
     BrowserAnimationsModule, 
     ToastrModule.forRoot(),
+    ReceiveCarModule,
+    ReceiveCarRoutingModule
   ],
   providers: [
     httpInterceptorProviders,
