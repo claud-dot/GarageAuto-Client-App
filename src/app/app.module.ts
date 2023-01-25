@@ -20,7 +20,6 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
 import { RepairComponent } from './components/home/repair/repair.component';
 import { CarComponent } from './components/home/car/car.component';
-import { HistoryComponent } from './components/home/history/history.component';
 
 import { httpInterceptorProviders } from './helpers/auth.interceptor';
 import { CarDepotComponent } from './components/home/car-depot/car-depot.component';
@@ -37,7 +36,6 @@ import { InoviceComponent } from './components/home/inovice/inovice.component';
     SignupComponent,
     RepairComponent,
     CarComponent,
-    HistoryComponent,
     CarDepotComponent,
     FormCarComponent,
     InfoCarComponent,
