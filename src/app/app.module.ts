@@ -1,5 +1,4 @@
 import { AuthGuard } from './guards/auth.guard';
-import { NgModule } from '@angular/core';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import * as fr from '@angular/common/locales/fr';
@@ -39,8 +38,8 @@ import { InoviceComponent } from './components/home/inovice/inovice.component';
     CarDepotComponent,
     FormCarComponent,
     InfoCarComponent,
-    InoviceComponent
-    FormCarComponent
+    InoviceComponent,
+    FormCarComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,7 +49,7 @@ import { InoviceComponent } from './components/home/inovice/inovice.component';
     HttpClientModule,
     BrowserAnimationsModule, 
     ToastrModule.forRoot(),
-    MaterialModule
+    MaterialModule,
     ReceiveCarModule,
     ReceiveCarRoutingModule
   ],
