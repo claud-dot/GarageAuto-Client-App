@@ -38,7 +38,7 @@ export class PaymentConfirmationComponent implements OnInit {
   }
 
   onPageChange(event : PageEvent){
-    
+     
   }
 
   ngOnInit(): void {
