@@ -1,5 +1,4 @@
 import { AuthGuard } from './guards/auth.guard';
-import { NgModule } from '@angular/core';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import * as fr from '@angular/common/locales/fr';
@@ -20,7 +19,6 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
 import { RepairComponent } from './components/home/repair/repair.component';
 import { CarComponent } from './components/home/car/car.component';
-import { HistoryComponent } from './components/home/history/history.component';
 
 import { httpInterceptorProviders } from './helpers/auth.interceptor';
 import { CarDepotComponent } from './components/home/car-depot/car-depot.component';
@@ -40,7 +38,6 @@ import { DeniedAccessComponent } from './error-page/denied-access/denied-access.
     SignupComponent,
     RepairComponent,
     CarComponent,
-    HistoryComponent,
     CarDepotComponent,
     FormCarComponent,
     InfoCarComponent,
@@ -59,7 +56,7 @@ import { DeniedAccessComponent } from './error-page/denied-access/denied-access.
     HttpClientModule,
     BrowserAnimationsModule, 
     ToastrModule.forRoot(),
-    MaterialModule
+    MaterialModule,
     ReceiveCarModule,
     ReceiveCarRoutingModule
   ],
