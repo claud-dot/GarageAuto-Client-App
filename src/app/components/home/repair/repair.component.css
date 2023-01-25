@@ -48,13 +48,24 @@
 
     .btn-recupere{
         display: flex;
+        width: 130px;
         align-items: center;
+        justify-content: space-around;
     }
 
     .btn-recupere button{
         background-color: #3d3e40;
         color: white;
     }
+
+    .btn-recupere i{
+        font-size: x-large;
+        color: orange;
+    }
+
+    /* i:hover{
+        cursor: pointer;
+    } */
 
     .content-head{
         position: sticky;
@@ -148,4 +159,14 @@
         padding: 2px 8px;
         margin-right: 6px;
         width: 235px;
+    }
+
+    .btn-recupere a{
+        position: relative;
+    }
+
+    .btn-recupere a span{
+        position: absolute;
+        left: -8px;
+        top: -8px;
     }

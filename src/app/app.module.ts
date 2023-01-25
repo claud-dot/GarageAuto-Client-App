@@ -19,6 +19,7 @@ import { httpInterceptorProviders } from './helpers/auth.interceptor';
 import { CarDepotComponent } from './components/home/car-depot/car-depot.component';
 import { FormCarComponent } from './components/home/form-car/form-car.component';
 import { InfoCarComponent } from './components/home/info-car/info-car.component';
+import { InoviceComponent } from './components/home/inovice/inovice.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { InfoCarComponent } from './components/home/info-car/info-car.component'
     CarComponent,
     CarDepotComponent,
     FormCarComponent,
-    InfoCarComponent
+    InfoCarComponent,
+    InoviceComponent
   ],
   imports: [
     BrowserModule,
