@@ -1,3 +1,102 @@
-<div class="content-repai">
-    <h2>Liste de votre reparation</h2>
-</div>
+<!-- <div class="container"> -->
+    <div class="row content-reparation">
+        <div class="content-head">
+            <div class="content-form-search">
+                <h2>Liste des reparations </h2>
+                <form [formGroup]="formSearch">
+                    <div class="search-form">
+                        <div class="select-search separate mb-3">
+                            <label for="filtre">Status</label>
+                            <select formControlName="filterStatus">
+                                <option value="null">Tous *</option>
+                                <option *ngFor="let statut of status;"  [value]="statut.value" >{{statut.name}}</option>
+                            </select>
+                        </div>
+                        <div class="select-search separate mb-3">
+                            <label for="filtre">Voiture</label>
+                            <select formControlName="filterCar">
+                                <option *ngFor="let head of headsTab;"  [value]="head.value" >{{head.name}}</option>
+                            </select>
+                        </div>
+                        <div class="input-search separate mb-3" *ngIf="!formSearch.value['filterCar']?.includes('_at')">
+                            <label for="filtre">Text</label>
+                            <input type="text" formControlName="text" >
+                            <i><span class="fa fa-search"></span></i>
+                        </div>
+                        <div class="input-date separate mb-3" *ngIf="formSearch.value['filterCar']?.includes('_at')">
+                            <label for="filtre">Date</label>
+                            <input  #date (focus)="date.type='date'" type="text" formControlName="date"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="grand-spin" *ngIf="loading.cars_repair">
+            <mat-spinner></mat-spinner>
+          </div>
+        <div class="col-md-12 list-reparation" *ngIf="!loading.cars_repair">
+            <div class="card mb-3 card-body" *ngFor="let repair of repairs.data">
+                <div class="row align-items-center">
+                    <div class="col-auto">
+                        <a href="#!.html">
+                          <img src="http://via.placeholder.com/280x280" class="width-90 rounded-3" alt="">
+                        </a>
+                    </div>
+                    <div class="col">
+                        <div class="overflow-hidden flex-nowrap">
+                            <div class="head-card">
+                                <h6 class="mb-1">
+                                    <span style="font-weight: 600;">Marque :  </span><a href="#!" class="text-reset">{{repair.user_car.mark}}</a>
+                                </h6>
+                                <h6 class="status-text">
+                                    <span [class]="repair.status ==0 ? 'text-reset' : '' ">{{getStatusRepair(repair.status)+' ...'}}</span>
+                                </h6>
+                            </div>
+                            <div class="other-car-detail">
+                                <div class="content-detail">
+                                    <span class="text-muted d-block mb-2 small">
+                                        <span style="font-weight: 600;">Model : </span> {{repair.user_car.model}}
+                                    </span>
+                                    <span class="text-muted d-block mb-2 small">
+                                        <span style="font-weight: 600;">Année de fabrication : </span> {{repair.user_car.year_of_manufacture}}
+                                    </span>
+                                </div>
+                                <div class="btn-recupere">
+                                    <a [routerLink]="['/home/inovice/'+repair._id]">
+                                        <i class="fa fa-file-text" aria-hidden="true"></i>
+                                        <span class="badge badge-danger">!</span>
+                                    </a>
+                                    <button class="btn btn-sm" [disabled]="repair.status == 0">Recuperé</button>
+                                </div>
+                            </div>
+                            <div class="row align-items-center">
+                                <div class="col-12">
+                                    <div class="row align-items-center g-0">
+                                        <div class="col-auto avancement-text">
+                                            <span class="small" style="font-weight: 600;">Avancement : </span><small class="me-2">{{repair.advancement}}%</small>
+                                        </div>
+                                        <div class="col">
+
+                                            <!-- Progress bar -->
+                                            <div class="progress bg-tint-success" style="height: 4px;">
+                                                <div class="progress-bar bg-success" role="progressbar" [style]="{'width': repair.advancement+'%'}" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <mat-paginator *ngIf="metadata"
+                [length]="metadata.total"
+                [pageSize]="dataRepair.nbBypage"
+                [pageSizeOptions]="[5, 10]"
+                (page)="onPageChange($event)"
+                aria-label="Select page">
+        </mat-paginator>
+    </div>
+<!-- </div> -->
