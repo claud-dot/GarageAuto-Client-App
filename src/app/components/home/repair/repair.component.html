@@ -28,11 +28,11 @@
                             <input  #date (focus)="date.type='date'" type="text" formControlName="date"/>
                         </div>
                     </div>
-                    </form>
+                </form>
             </div>
         </div>
         <div class="grand-spin" *ngIf="loading.cars_repair">
-            <div class="spinner-border" role="status"></div>
+            <mat-spinner></mat-spinner>
           </div>
         <div class="col-md-12 list-reparation" *ngIf="!loading.cars_repair">
             <div class="card mb-3 card-body" *ngFor="let repair of repairs.data">
@@ -62,6 +62,10 @@
                                     </span>
                                 </div>
                                 <div class="btn-recupere">
+                                    <a [routerLink]="['/home/inovice/'+repair._id]">
+                                        <i class="fa fa-file-text" aria-hidden="true"></i>
+                                        <span class="badge badge-danger">!</span>
+                                    </a>
                                     <button class="btn btn-sm" [disabled]="repair.status == 0">Recuperé</button>
                                 </div>
                             </div>

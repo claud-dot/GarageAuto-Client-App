@@ -1,4 +1,6 @@
-
+*{
+    scroll-behavior: smooth;
+}
 .head-car{
     display: flex;
     justify-content: space-between;

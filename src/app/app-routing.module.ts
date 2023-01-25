@@ -10,6 +10,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard, IsSignedInGuard } from './guards/auth.guard';
 import { ClientGuard } from './guards/role.guard';
 import { InfoCarComponent } from './components/home/info-car/info-car.component';
+import { InoviceComponent } from './components/home/inovice/inovice.component';
 
 const routes: Routes = [
   { path: '' , redirectTo :'/login' , pathMatch : 'full' },
@@ -39,6 +40,10 @@ const routes: Routes = [
         path : 'repair',
         component : RepairComponent,
         canActivate : [ClientGuard,AuthGuard]
+      },
+      {
+        path : 'inovice/:id_repair',
+        component : InoviceComponent
       }
     ]
   },
