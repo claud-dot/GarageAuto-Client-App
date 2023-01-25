@@ -16,7 +16,7 @@ export class LoginComponent {
     loginForm !: FormGroup;
     hide : boolean = true;
     loading : any = {};
-    user_roles : any = [];
+    user_roles : any;
 
     constructor(
       private formbuild : FormBuilder , 
@@ -41,7 +41,7 @@ export class LoginComponent {
     getRoles(){
       this.loading.role = true;
       const success = (roles : any)=>{
-        this.data.roles = roles;
+        this.user_roles = roles;
         this.loading.role = false;
       }
 
@@ -57,6 +57,7 @@ export class LoginComponent {
     }
 
     ngOnInit(){
+      this.getRoles();
       this.initForm();
     }
 }

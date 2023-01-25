@@ -20,6 +20,10 @@ export class UserService {
     return this.http.get(environment.nodeApi_url+'/user/cars/'+JSON.stringify(data), {withCredentials : true})
   }
 
+  getUser_repair(id_repair : string){
+    return this.http.get(environment.nodeApi_url+'/user/repair/'+id_repair , { withCredentials: true });
+  }
+
   addCar_user(dataCar : any){
     const user =this.storage.get('USER_KEY');
     dataCar.user_id = user.id;

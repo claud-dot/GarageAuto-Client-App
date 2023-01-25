@@ -9,7 +9,15 @@ export class InoviceService {
 
   constructor(private http : HttpClient) { }
 
-  getInoviceRepair(id_inovice : string){
-     return this.http.get(environment.nodeApi_url+"/inovice/repair/"+id_inovice , { withCredentials: true });
+  getInvoiceRepair(id_inovice : string){
+     return this.http.get(environment.nodeApi_url+"/invoice/repair/"+id_inovice , { withCredentials: true });
+  }
+
+  payInvoice(id_inovice: string){
+    return this.http.get(environment.nodeApi_url+"/invoice/pay/"+id_inovice , { withCredentials: true });
+  }
+
+  validPayInvoice(id_inovice: string){
+    return this.http.get(environment.nodeApi_url+"/invoice/pay/valid/"+id_inovice , { withCredentials: true });
   }
 }
