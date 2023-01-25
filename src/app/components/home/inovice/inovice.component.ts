@@ -55,7 +55,7 @@ export class InoviceComponent implements OnInit {
     const error = (error : HttpErrorResponse)=>{
       console.log(" Pay error "+error.message);
       console.log(" Pay status"+error.status);
-      this.utils.openToastr(error.error.message , "Get inovice error" , 'error' )
+      this.utils.openToastr(error.error.message , "Pay inovice error" , 'error' )
       this.loading.invoice = false;
     }
     this.invoiceService.payInvoice(id_inovice).subscribe(success, error);
@@ -71,7 +71,7 @@ export class InoviceComponent implements OnInit {
     const error = (error : HttpErrorResponse)=>{
       console.log(" valid error "+error.message);
       console.log(" valid status"+error.status);
-      this.utils.openToastr(error.error.message , "Get inovice error" , 'error' )
+      this.utils.openToastr(error.error.message , "Valid inovice error" , 'error' )
       this.loading.invoice = false;
     }
     this.invoiceService.validPayInvoice(id_inovice).subscribe(success,error);
