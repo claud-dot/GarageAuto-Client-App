@@ -127,6 +127,28 @@ hr {
 }
 
 
+.head-invoice{
+    position: relative;
+}
+
+.stat-icon-check{
+    position: absolute;
+    top: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+.stat-icon-check .fa-check{
+    color: #86bd68;
+    font-size: xx-large;
+}
+
+.stat-icon-check .fa-close{
+    color: #ec052eab;
+    font-size: xx-large;
+}
+
+
 
 
 

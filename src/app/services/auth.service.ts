@@ -8,6 +8,12 @@ import { Injectable } from '@angular/core';
 })
 export class AuthService {
 
+  public roleUrl = [
+    { role : "Client", urlDefault :  'home'},
+    { role : "Responsable Financier" , urlDefault : "home/financier"},
+    { role : "Responsable Atelier" , urlDefault : "home/atelier"},
+  ]
+
   constructor(private htttp : HttpClient , private storage : StorageService) { }
 
   isLoggedIn(){

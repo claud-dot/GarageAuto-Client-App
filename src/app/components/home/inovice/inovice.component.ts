@@ -45,36 +45,40 @@ export class InoviceComponent implements OnInit {
     this.invoiceService.getInvoiceRepair(this.id_repair).subscribe(success, error);
   }
 
-  onPay(id_inovice: string){
-    const success = (data : any)=>{
-      this.invoice = data.invoice;
-      this.user = data.user;
-      this.loading.invoice = false;
+  onPay(inovice: any){
+    this.loading.paye = true;
+    const success = (response : any)=>{
+      this.invoice = response.data.invoice;
+      this.utils.openToastr(response.message , "Pay inovice success" , 'success' );
+      this.loading.paye = false;
     }
 
     const error = (error : HttpErrorResponse)=>{
       console.log(" Pay error "+error.message);
       console.log(" Pay status"+error.status);
       this.utils.openToastr(error.error.message , "Pay inovice error" , 'error' )
-      this.loading.invoice = false;
+      this.loading.paye = false;
     }
-    this.invoiceService.payInvoice(id_inovice).subscribe(success, error);
+    this.invoiceService.payInvoice(inovice).subscribe(success, error);
   }
 
-  onValid(id_inovice: string){
-    const success = (data : any)=>{
-      this.invoice = data.invoice;
-      this.user = data.user;
-      this.loading.invoice = false;
+  onValid(inovice : any){
+    this.loading.valid = true;
+    const success = (response : any)=>{
+      console.log(response);
+      
+      this.invoice = response.data.invoice;
+      this.utils.openToastr(response.message , "Valid inovice success" , 'success' );
+      this.loading.valid = false;
     }
 
     const error = (error : HttpErrorResponse)=>{
       console.log(" valid error "+error.message);
       console.log(" valid status"+error.status);
       this.utils.openToastr(error.error.message , "Valid inovice error" , 'error' )
-      this.loading.invoice = false;
+      this.loading.valid = false;
     }
-    this.invoiceService.validPayInvoice(id_inovice).subscribe(success,error);
+    this.invoiceService.validPayInvoice(inovice).subscribe(success,error);
   }
 
   ngOnInit(): void {
