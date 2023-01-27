@@ -25,9 +25,10 @@ export class RepairComponent implements OnInit {
   ];
   status = [
     { name : "En attent de facture" , value : 0},
-    { name : "En reparation" , value : 1},
-    { name : "En attent de recuperation" , value : 2},
-    { name : "Recuperé" , value : 3}
+    { name : "Facture attent validation" , value : 1},
+    { name : "En reparation" , value : 2},
+    { name : "En attent de recuperation" , value : 3},
+    { name : "Recuperé" , value : 4}
   ] 
 
   constructor(private carService : CarService ,private utils : UtlisService ,  private build: FormBuilder) {}
@@ -51,13 +52,7 @@ export class RepairComponent implements OnInit {
   }
 
   getStatusRepair(status : number){
-    if(status == 0){
-      return "En attente de facture";
-    }else if(status == 1){
-      return "En reparation";
-    }else {
-      return "Recuperé";
-    }
+    return this.status.find((stat : any)=> stat.value == status)?.name;
   }
 
   onPageChange(event : PageEvent){

@@ -1,0 +1,42 @@
+.content-chart-line{
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: 0 20px 27px 0 rgb(0 0 0 / 10%);
+    background-color: #fff;
+}
+
+.title-head{
+    font-size: 22px;
+    font-weight: 600;
+    color: rgba(31, 30, 30, 0.847);
+}
+
+.chart-line{
+    padding: 10px;
+    height: 275px;
+}
+
+.row{
+    margin: 0;
+}
+
+hr{
+    border: 1px solid rgba(29, 28, 28, 0.477) ;
+    border-radius: 5px;
+    margin: 4px 0;
+}
+
+.head-chart{
+    display: flex;
+    justify-content: space-between;
+    padding: 7px 0;
+}
+
+.form-repair{
+    display: flex;
+}
+
+.content-filter{
+    display: flex;
+    align-items: center;
+}

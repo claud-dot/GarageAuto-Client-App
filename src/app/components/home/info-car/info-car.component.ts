@@ -20,11 +20,12 @@ export class InfoCarComponent implements OnInit {
   dataStory : any = {page : 1, nbBypage : 5 , status : "null"};
   metadata : any = {} ; 
   status : any  = [ 
-                    { stat : "En attente de facture" ,value : 0 },
-                    { stat : "En reparation" ,value : 1 },
-                    { stat : "En attente de recuperation" ,value : 2 },
-                    { stat : "Recuperée" ,value : 3 },
-                  ]
+      { name : "En attente de facture" ,value : 0  , class :'status text-danger'},
+      { name : "Facture attente de validation" ,value : 1  , class :'status text-warning'},
+      { name : "En reparation" ,value :2  , class :'status text-info' },
+      { name : "En attente de recuperation" ,value : 3  , class :'status text-success'},
+      { name : "Recuperée" ,value : 4  , class : 'text-secondary'},
+  ]
 
   constructor(private carService :  CarService , private utilsService: UtlisService , private router : ActivatedRoute , private build : FormBuilder) {
     this.car_id = this.router.snapshot.params['id_car']
@@ -73,15 +74,7 @@ export class InfoCarComponent implements OnInit {
   }
 
   getAboutStatus(status :number){
-    if(status == 0){
-      return { class : "status text-warning" , name : "En attente de facture" }
-    }else if(status== 1){
-      return { class : "status text-info" , name : "En reparation" }
-    }else if(status == 2){
-      return { class : "status text-success" , name : "En attente de recuperation" }
-    }else {
-      return { class : "status text-dark" , name : "Recuperé" }
-    }
+    return this.status.find((stat: any)=> stat.value == status);
   }
 
   getCarDetails(){

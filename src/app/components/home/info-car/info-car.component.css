@@ -197,3 +197,10 @@ table.table .avatar {
 .content-spinner mat-spinner{
 	font-size: medium;
 }
+
+.head-story{
+	box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%);
+	/* position: sticky;
+	top: 70px;
+	z-index: 1; */
+}

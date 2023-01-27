@@ -37,7 +37,15 @@ export class CarService {
 
   //Financier requette
   getPayementRepair(data : any){
-    return this.http.get(environment.nodeApi_url+'/repair/payment/'+JSON.stringify(data) , { withCredentials : true });
+    return this.http.get(environment.nodeApi_url+'/repair/payment/'+JSON.stringify(data) , { withCredentials : true  });
+  }
+
+  getRepairStat(data : any){
+    return this.http.get(environment.nodeApi_url+'/repair/statistique/'+JSON.stringify(data), { withCredentials: true });
+  }
+
+  getTurnoverStat(unit_duration : string){
+    return this.http.get(environment.nodeApi_url+'/invoice/turnover/'+unit_duration, { withCredentials: true });
   }
 
 }
