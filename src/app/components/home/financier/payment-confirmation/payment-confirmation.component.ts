@@ -38,7 +38,11 @@ export class PaymentConfirmationComponent implements OnInit {
   }
 
   onPageChange(event : PageEvent){
-    
+    const startIndex = event.pageIndex * event.pageSize;
+    let endIndex = startIndex + event.pageSize;
+    this.dataPayment.nbBypage = endIndex-startIndex;
+    this.dataPayment.page = endIndex/this.dataPayment.nbBypage;
+    this.getPayements();
   }
 
   ngOnInit(): void {

@@ -13,10 +13,14 @@ export class InvoiceGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      if(this.authService.RoleAccess()==='Responsable Financier' || this.authService.RoleAccess()==='Client'){
+      const roleUser = this.authService.RoleAccess();
+      const urlDefault = this.authService.roleUrl.find((rolDefaultUrl : any)=> rolDefaultUrl.role == roleUser );
+      console.log(urlDefault);
+      
+      if(roleUser==='Responsable Financier' || roleUser==='Client'){
         return true;
      }else{
-        this.router.navigate(['error-page']);
+        this.router.navigate([urlDefault?.urlDefault]);
         return false;
      }
   }

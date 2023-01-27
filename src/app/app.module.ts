@@ -23,6 +23,10 @@ import { InoviceComponent } from './components/home/inovice/inovice.component';
 import { PaymentConfirmationComponent } from './components/home/financier/payment-confirmation/payment-confirmation.component';
 import { StatisticComponent } from './components/home/financier/statistic/statistic.component';
 import { DeniedAccessComponent } from './error-page/denied-access/denied-access.component';
+import { LineAverageChartComponent } from './chart/line-average-chart/line-average-chart.component';
+import { NgChartsModule } from 'ng2-charts';
+import { BarChartComponent } from './chart/bar-chart/bar-chart.component';
+import { SimulationChartComponent } from './chart/simulation-chart/simulation-chart.component';
 
 
 @NgModule({
@@ -39,7 +43,10 @@ import { DeniedAccessComponent } from './error-page/denied-access/denied-access.
     InoviceComponent,
     PaymentConfirmationComponent,
     StatisticComponent,
-    DeniedAccessComponent
+    DeniedAccessComponent,
+    LineAverageChartComponent,
+    BarChartComponent,
+    SimulationChartComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +56,8 @@ import { DeniedAccessComponent } from './error-page/denied-access/denied-access.
     HttpClientModule,
     BrowserAnimationsModule, 
     ToastrModule.forRoot(),
-    MaterialModule
+    MaterialModule,
+    NgChartsModule
   ],
   providers: [
     httpInterceptorProviders,
