@@ -51,7 +51,7 @@ import { SimulationChartComponent } from './chart/simulation-chart/simulation-ch
     DeniedAccessComponent,
     LineAverageChartComponent,
     BarChartComponent,
-    SimulationChartComponent
+    SimulationChartComponent,
     InoviceComponent,
     FormCarComponent
   ],
@@ -64,7 +64,7 @@ import { SimulationChartComponent } from './chart/simulation-chart/simulation-ch
     BrowserAnimationsModule, 
     ToastrModule.forRoot(),
     MaterialModule,
-    NgChartsModule
+    NgChartsModule,
     ReceiveCarModule,
     ReceiveCarRoutingModule
   ],
