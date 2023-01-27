@@ -1,1 +1,50 @@
-<p>statistic works!</p>
+<div class="content-statistic row">
+    <div class="col-md-6 pl-0">
+        <div class="content-chart-line">
+            <div class="head-chart">
+                <h3 class="title-head">Temps moyenne de reparation</h3>
+                <div class="content-filter">
+                    <form class="form-repair" [formGroup]="lineForm">
+                        <select *ngIf="!loading.car" class="form-select form-select-sm mr-2" formControlName="mark" aria-label=".form-select-sm example">
+                            <option selected value="">Selectionné..</option>
+                            <option *ngFor="let car of dataLineStat.cars;" >{{car.mark}}</option>
+                        </select>
+                        <select *ngIf="!loading.car" class="form-select form-select-sm" id="model" formControlName="model" aria-label=".form-select-sm example">
+                            <option selected value="">Selectionné..</option>
+                            <option *ngFor="let model of modelMark">{{model}}</option>
+                        </select>
+                    </form>
+                </div>
+            </div>
+            <hr>
+            <div class="chart-line">
+                <div class="grand-spin" *ngIf="loading.stat_repair || loading.cars">
+                    <mat-spinner></mat-spinner>
+                </div>
+                <app-line-average-chart *ngIf="!loading.stat_repair" [dataChart]="dataLineStat"></app-line-average-chart>
+            </div>
+        </div>
+    </div>
+    <div class="col-md pr-0">
+        <div class="content-chart-line">
+            <div class="head-chart">
+                <h3 class="title-head">Chiffre d'affaire</h3>
+                <div class="content-filter">
+                    <form class="form-repair" [formGroup]="barForm">
+                        <select class="form-select form-select-sm" formControlName="unit_duration" aria-label=".form-select-sm example">
+                            <option selected value="null">Selectionné..</option>
+                            <option *ngFor="let choice of ['Jours','Mois']">{{choice}}</option>
+                        </select>
+                    </form>
+                </div>
+            </div>
+            <hr>
+            <div class="chart-line">
+                <div class="grand-spin" *ngIf="loading.stat_turnover">
+                    <mat-spinner></mat-spinner>
+                </div>
+                <app-bar-chart *ngIf="!loading.stat_turnover" [dataChart]="dataBarStat"></app-bar-chart>
+            </div>
+        </div>
+    </div>
+</div> 

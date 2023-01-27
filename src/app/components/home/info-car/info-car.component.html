@@ -1,4 +1,4 @@
-<div class="card mb-3">
+<div class="head-story card mb-3">
     <img class="card-img-top" src="http://via.placeholder.com/894x100" alt="Card image cap">
     <div class="card-body">
       <div *ngIf="!loading.car">
@@ -24,7 +24,7 @@
                                 <div class="form-floating">
                                     <select class="form-select" formControlName="status" (change)="onFilterStory()" id="floatingSelect" aria-label="Floating label select example">
                                         <option selected >Tous *</option>
-                                        <option *ngFor="let statut of status" [value]="statut.value">{{statut.stat}}</option>
+                                        <option *ngFor="let statut of status" [value]="statut.value">{{statut.name}}</option>
                                     </select>
                                     <label for="floatingSelect">Status</label>
                                 </div>

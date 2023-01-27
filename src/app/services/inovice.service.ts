@@ -13,11 +13,11 @@ export class InoviceService {
      return this.http.get(environment.nodeApi_url+"/invoice/repair/"+id_inovice , { withCredentials: true });
   }
 
-  payInvoice(id_inovice: string){
-    return this.http.get(environment.nodeApi_url+"/invoice/pay/"+id_inovice , { withCredentials: true });
+  payInvoice(inovice: any){
+    return this.http.put(environment.nodeApi_url+"/invoice/pay", inovice , { withCredentials: true });
   }
 
-  validPayInvoice(id_inovice: string){
-    return this.http.get(environment.nodeApi_url+"/invoice/pay/valid/"+id_inovice , { withCredentials: true });
+  validPayInvoice(inovice: any){
+    return this.http.put(environment.nodeApi_url+"/invoice/pay/valid",inovice , { withCredentials: true });
   }
 }

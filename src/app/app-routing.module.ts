@@ -17,11 +17,14 @@ import { PaymentConfirmationComponent } from './components/home/financier/paymen
 import { StatisticComponent } from './components/home/financier/statistic/statistic.component';
 import { DeniedAccessComponent } from './error-page/denied-access/denied-access.component';
 import { InvoiceGuard } from './guards/other.guard';
+import { LineAverageChartComponent } from './chart/line-average-chart/line-average-chart.component';
+import { BarChartComponent } from './chart/bar-chart/bar-chart.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent, canActivate: [IsSignedInGuard] },
-  { path: 'signup', component: SignupComponent, canActivate: [IsSignedInGuard] },
+
+  { path: '' , redirectTo :'/login' , pathMatch : 'full' },
+  { path : 'login', component : LoginComponent , canActivate : [IsSignedInGuard] },
+  { path : 'signup' , component : SignupComponent , canActivate : [IsSignedInGuard] },
   {
     path: 'home',
     component: HomeComponent,
