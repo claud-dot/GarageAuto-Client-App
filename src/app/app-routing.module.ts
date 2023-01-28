@@ -19,12 +19,14 @@ import { DeniedAccessComponent } from './error-page/denied-access/denied-access.
 import { InvoiceGuard } from './guards/other.guard';
 import { LineAverageChartComponent } from './chart/line-average-chart/line-average-chart.component';
 import { BarChartComponent } from './chart/bar-chart/bar-chart.component';
+import { SimulationChartComponent } from './chart/simulation-chart/simulation-chart.component';
 
 const routes: Routes = [
 
   { path: '' , redirectTo :'/login' , pathMatch : 'full' },
   { path : 'login', component : LoginComponent , canActivate : [IsSignedInGuard] },
   { path : 'signup' , component : SignupComponent , canActivate : [IsSignedInGuard] },
+  { path : 'simule-chart' , component : SimulationChartComponent },
   {
     path: 'home',
     component: HomeComponent,

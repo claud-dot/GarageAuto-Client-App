@@ -13,17 +13,12 @@ import { UtlisService } from 'src/app/services/utlis.service';
 export class BarChartComponent implements OnInit {
 
   @Input() dataChart : any = {};
-
-  labelsChart = [
-    { ref : "jour" , label : ['Lundi' , 'Mardi' , 'Mercredi' ,'Jeudi' , 'Vendredi' , 'Samedi', 'Dimanche'] },
-    { ref : "mois" , label : ['Janvier','Fevrier' , 'Mars' , 'Avril' , 'Mais' ,'Juin' ,'Juillet' , 'Août' ,'Septembre' , 'Novembre' ,'Decembre']}
-  ];
   
   labels : string[];
   type : string;
   data : any[];
 
-  constructor(private invoiceService : InoviceService , private utils : UtlisService) {
+  constructor() {
     Chart.register(...registerables);
     Chart.register(annotationPlugin);
   }
@@ -32,8 +27,6 @@ export class BarChartComponent implements OnInit {
     this.labels = this.dataChart.data.labels
     this.type = this.dataChart.type;
     this.data = this.dataChart.data.data;
-    console.log(this.dataChart);
-    
   }
 
   barChart(){
@@ -42,7 +35,7 @@ export class BarChartComponent implements OnInit {
     const data = {
       labels: labels,
       datasets: [{
-        label: 'My First Dataset',
+        label: 'Chiffre d\'affaire',
         data: this.data,
         backgroundColor: '#044c82eb',
         borderColor : 'transparent',
