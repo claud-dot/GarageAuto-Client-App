@@ -36,8 +36,6 @@ export class HomeComponent implements OnInit {
     }
 
     linkActive(){
-      console.log(this.user , "jbjbjbj");
-      
       if(this.user.role.toLowerCase()=="client"){
         this.linkApp = this.linkClient;
       }else if(this.user.role.toLowerCase()=="responsable financier"){

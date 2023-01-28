@@ -29,4 +29,9 @@ export class UserService {
     dataCar.user_id = user.id;
     return this.http.post(environment.nodeApi_url+'/user/add-car',dataCar , { withCredentials : true });
   }
+
+  getSimulationStat(dataSimulation : any){
+    return this.http.get(environment.nodeApi_url+"/user/simulate/"+JSON.stringify(dataSimulation) , { withCredentials: true });
+  }
+
 }

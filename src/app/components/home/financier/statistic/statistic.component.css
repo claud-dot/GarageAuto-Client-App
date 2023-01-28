@@ -1,7 +1,7 @@
 .content-chart-line{
     padding: 10px 20px;
     border-radius: 10px;
-    box-shadow: 0 20px 27px 0 rgb(0 0 0 / 10%);
+    box-shadow: 2px 5px 20px 0 rgb(0 0 0 / 10%);
     background-color: #fff;
 }
 
@@ -39,4 +39,69 @@ hr{
 .content-filter{
     display: flex;
     align-items: center;
+}
+
+.content-simulat{
+    margin-top: 50px;
+}
+
+.content-simulat .chart-line{
+    height: 320px;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+}
+
+.form-simul{
+    width: 340px ;
+}
+
+.content-form-simul{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.content-form-simul h5{
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.input-simule{
+    display: flex;
+    justify-content: space-between;
+}
+
+.input-simule input{
+    width: 80%;
+}
+
+.content-add{
+    padding: 20px 14px;
+}
+
+.alert{
+
+    position: relative;
+}
+
+.list-depenses{
+    display: flex;
+    justify-content: space-between;
+    width: 650px;
+}
+
+.depense::before{
+    content: "";
+	height:60%;
+    width: 2px;
+	position: absolute;
+	background: #2e75aa;
+	top: 15px;
+    border-radius: 8px;
+}
+
+.depense h5{
+    font-size: 14px;
 }
