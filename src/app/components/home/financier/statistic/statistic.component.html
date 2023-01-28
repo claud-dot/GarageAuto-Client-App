@@ -6,11 +6,11 @@
                 <div class="content-filter">
                     <form class="form-repair" [formGroup]="lineForm">
                         <select *ngIf="!loading.car" class="form-select form-select-sm mr-2" formControlName="mark" aria-label=".form-select-sm example">
-                            <option selected value="">Selectionné..</option>
+                            <option selected value="">Marque..</option>
                             <option *ngFor="let car of dataLineStat.cars;" >{{car.mark}}</option>
                         </select>
                         <select *ngIf="!loading.car" class="form-select form-select-sm" id="model" formControlName="model" aria-label=".form-select-sm example">
-                            <option selected value="">Selectionné..</option>
+                            <option selected value="">Modele..</option>
                             <option *ngFor="let model of modelMark">{{model}}</option>
                         </select>
                     </form>
@@ -44,6 +44,86 @@
                     <mat-spinner></mat-spinner>
                 </div>
                 <app-bar-chart *ngIf="!loading.stat_turnover" [dataChart]="dataBarStat"></app-bar-chart>
+            </div>
+        </div>
+    </div>
+    <div class="content-simulat p-0">
+        <div class="content-chart-line">
+            <div class="head-chart">
+                <h3 class="title-head">Bénefice par mois</h3>
+                <div class="content-filter">
+                    <form class="form-repair" [formGroup]="simuleTypeForm">
+                        <select class="form-select form-select-sm" formControlName="choice" aria-label=".form-select-sm example">
+                            <option selected value="null">Selectionné..</option>
+                            <option *ngFor="let choice of ['Mois','Global']">{{choice}}</option>
+                        </select>
+                    </form>
+                </div>
+            </div>
+            <hr>
+            <div class="row pl-0 pr-0">
+                <div class="col-md-4 content-form-simul">
+                    <h5 style="line-height: 3;">Formulaire des depenses : </h5>
+                    <form class="form-simul" [formGroup]="simuleForm">
+                        <div class="form-group row mb-3" *ngFor="let input of inputSimule">
+                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm pl-0">{{input.name}}</label>
+                            <div class="col-sm-10">
+                              <input type="number" [formControlName]="input.value" class="form-control form-control-sm" id="colFormLabelSm" [placeholder]="input.place">
+                            </div>
+                        </div>
+                        <div class="form-group row mb-3" *ngIf="addBtn!='Global'">
+                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm pl-0">Mois</label>
+                            <div class="col-sm-10">
+                              <select class="form-select form-select-sm" formControlName="month">
+                                <option *ngFor="let month of months">{{month}}</option>
+                              </select>
+                            </div>
+                        </div>
+                    </form>
+                    <button *ngIf="loading.simulation" class="btn btn-secondary btn-sm mt-1" type="button" disabled>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Loading...
+                    </button>
+                    <button type="button" *ngIf="addBtn=='Global' && !loading.simulation" (click)="onSimule()" [disabled]="simuleForm.invalid" class="btn btn-secondary btn-sm mt-1">valider</button>
+                    <button (click)="scrollTo('collapseExample')" (click)="onAddSimule()" type="button" *ngIf="addBtn!='Global' && !loading.simulation" [disabled]="simuleForm.invalid" class="btn btn-secondary btn-sm mt-1">Ajouter</button>
+                </div>
+                <div class="col-md chart-line">
+                    <div class="grand-spin" *ngIf="loading.simulation">
+                        <mat-spinner></mat-spinner>
+                    </div>
+                    <app-simulation-chart [dataChart]="dataSimulStat" *ngIf="!loading.simulation" ></app-simulation-chart>
+                </div>
+                <div class="col-md-12 content-add">
+                    <div class="collapse"  id="collapseExample">
+                        <div class="card card-body">
+                            <h4 style="line-height: 3;">Liste des depenses</h4>
+                            <div class="content-list-depenses">
+                                <div class="alert alert-secondary alert-dismissible fade show" style="padding: 5px 10px;" role="alert" *ngFor="let simule of listSimule; let i=index">
+                                    <div class="list-depenses" >
+                                        <div class="depense text-break" *ngFor="let item of inputSimule">
+                                            <div class="pl-2">
+                                                <h5 class="text-muted text-break">{{item.place.substr(0,1).toUpperCase()+""+item.place.substr(1,item.place.length-1)}}</h5>
+                                                <small>{{simule[item.value]+" Ar"}}</small>
+                                            </div>
+                                        </div>
+                                        <div class="depense">
+                                            <div class="pl-2">
+                                                <h5 class="text-muted">Mois</h5>
+                                                <small>{{simule.month}}</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="button" (click)="onDeleteSimule(i)" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                <button *ngIf="loading.simulation" class="btn btn-secondary btn-sm" type="button" disabled>
+                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                    Loading...
+                                </button>
+                                <button *ngIf="!loading.simulation" class="btn btn-secondary btn-sm" (click)="onSimule()" [disabled]="inputSimule.length<=0">valider</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
