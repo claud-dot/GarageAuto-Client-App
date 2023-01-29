@@ -62,11 +62,13 @@
                                     </span>
                                 </div>
                                 <div class="btn-recupere">
-                                    <a *ngIf="repair.isFactured" [routerLink]="['/home/invoice/'+repair._id]">
+                                    <a *ngIf="repair.isFactured" [routerLink]="['/home/invoice/'+repair._id]"
+                                        matTooltip="Info sur la facture"
+                                        aria-label="Button that displays a tooltip when focused or hovered over">
                                         <i class="fa fa-file-text" aria-hidden="true"></i>
                                         <!-- <span class="badge badge-danger">!</span> -->
                                     </a>
-                                    <button class="btn btn-sm" [disabled]="repair.status!=3">Recuperé</button>
+                                    <button class="btn btn-sm" [disabled]="repair.status<4">Recuperé</button>
                                 </div>
                             </div>
                             <div class="row align-items-center">

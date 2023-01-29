@@ -1,0 +1,25 @@
+<div class="modal-header">
+    <h4 class="modal-title">Image Cropper</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="closeModal('close')"></button>
+  </div>
+  <div class="modal-body" >
+    <article>
+      <!-- <image-cropper 
+        [imageChangedEvent]="imageChangedEvent" 
+        [maintainAspectRatio]="true" 
+        [aspectRatio]="croperOptions.ratio"
+        [resizeToWidth]="croperOptions.toWidth"
+        [resizeToHeight]="croperOptions.toHeight"
+        [hideResizeSquares]="true"
+        format="png" 
+        (imageCropped)="imageCropped($event)" 
+        (imageLoaded)="imageLoaded()"
+        (cropperReady)="cropperReady()" 
+        (loadImageFailed)="loadImageFailed()">
+      </image-cropper> -->
+    </article>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" (click)="closeModal('accept')">Save</button>
+    <button type="button" class="btn btn-default" (click)="closeModal('refuse')">Close</button>
+  </div>

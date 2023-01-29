@@ -8,7 +8,7 @@ import { UtlisService } from 'src/app/services/utlis.service';
 @Component({
   selector: 'app-repair',
   templateUrl: './repair.component.html',
-  styleUrls: ['./repair.component.css']
+  styleUrls: ['./repair.component.css','../car/car.component.css']
 })
 export class RepairComponent implements OnInit {
   repairs : any;

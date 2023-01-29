@@ -93,7 +93,8 @@ export class StatisticComponent implements OnInit {
       console.log("Status stat error "+error.status);
       this.loading.stat_repair =false;
     }
-
+    console.log(this.dataLineChart);
+    
     this.carService.getRepairStat(this.dataLineChart).subscribe(success , error);
   }
 

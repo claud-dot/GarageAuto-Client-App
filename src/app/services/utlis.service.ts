@@ -74,16 +74,6 @@ export class UtlisService {
     this.authService.Logout().subscribe(success, error);
   }
 
-  onBlurForm(formName : string , elementId : string , formGroup :FormGroup){
-    var alert = $('#'+elementId).parent();
-    if(formGroup.get(formName)?.errors && (formGroup.get(formName)?.dirty || formGroup.get(formName)?.touched)){
-      $(alert).addClass('alert-validate');  
-    }else{
-      $(alert).removeClass('alert-validate');
-      $(alert).css('border' , '1px solid #e6e6e6');
-    }            
-  }
-
   checkStatusErr(statusCode : number){
     if(statusCode == 401 || statusCode == 403){
       this.storage.clear();
@@ -92,24 +82,11 @@ export class UtlisService {
 
 
   onSubmitForm(formGroup : FormGroup , loading : any , typeSubmit = 'Log'){
-    if(formGroup.invalid){
-      var formInvalid = $('.ng-invalid');
-      
-      for (const iterator of formInvalid) {
-        var idName = $(iterator).attr('id');
-        if(idName){
-          var parents = $('#'+idName).parent();
-          $(parents).css('border' , '1px solid #e84949');
-        }
-      }
-      return;
-    }else{
       if(typeSubmit=='Log'){
         this.Login(formGroup.value , loading);
       }else{
         this.SignUp(formGroup.value , loading)
       }
-    }
   }
 
   openToastr(message : string, title : string , type : string){

@@ -14,9 +14,11 @@ export class AuthService {
     { role : "Responsable Atelier" , urlDefault : "home/atelier"},
   ]
 
-  constructor(private htttp : HttpClient , private storage : StorageService) { }
+  constructor(private http : HttpClient , private storage : StorageService) { }
 
   isLoggedIn(){
+    console.log(this.storage.getCookie('garazeAuto-session'));
+    
     return this.storage.get('USER_KEY');
   }
 
@@ -25,14 +27,18 @@ export class AuthService {
   }
 
   Login(userData : any){
-    return this.htttp.post(environment.nodeApi_url+'/auth/signin',userData ,  { headers: environment.header });
+    return this.http.post(environment.nodeApi_url+'/auth/signin',userData ,  { headers: environment.header });
   }
 
   SignUp(userData : any){  
-    return this.htttp.post(environment.nodeApi_url+'/auth/signup' , userData);
+    return this.http.post(environment.nodeApi_url+'/auth/signup' , userData);
   }
 
   Logout(){
-    return this.htttp.post(environment.nodeApi_url+'/auth/signout',{} , { headers: environment.header });
+    return this.http.post(environment.nodeApi_url+'/auth/signout',{} , { headers: environment.header });
+  }
+
+  Cookies(){
+    return this.http.get(environment.nodeApi_url+'/auth/cookies', { observe: 'response',headers: environment.header} );
   }
 }

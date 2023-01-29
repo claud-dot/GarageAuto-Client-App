@@ -3,6 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute } from '@angular/router';
+// import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+// import { ModalDismissReasons, NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { CorpImageComponent } from 'src/app/modal/corp-image/corp-image.component';
 import { CarService } from 'src/app/services/car.service';
 import { UtlisService } from 'src/app/services/utlis.service';
 
@@ -13,6 +16,7 @@ import { UtlisService } from 'src/app/services/utlis.service';
 })
 export class InfoCarComponent implements OnInit {
 
+  imageUpload : any;
   filterForm : FormGroup;
   car_id : string;
   data : any = {};
@@ -27,10 +31,30 @@ export class InfoCarComponent implements OnInit {
       { name : "Recuperée" ,value : 4  , class : 'text-secondary'},
   ]
 
-  constructor(private carService :  CarService , private utilsService: UtlisService , private router : ActivatedRoute , private build : FormBuilder) {
+  constructor(private carService :  CarService ,
+              private utilsService: UtlisService ,
+              private router : ActivatedRoute ,
+              private build : FormBuilder,) {
     this.car_id = this.router.snapshot.params['id_car']
     this.dataStory = { car_id : this.car_id , ...this.dataStory };
   }
+
+  // onChangeCarImage(event : any){
+  //   const options : NgbModalOptions  = {
+  //     backdrop : 'static',
+  //     keyboard : false,
+  //     centered: true,
+  //     ariaLabelledBy : "Corp image"
+  //   }
+  //   const corpModal = this.modalService.open(CorpImageComponent , options);
+  //   corpModal.componentInstance.dataImage={
+  //      event : event,
+  //      uploadFile : this.imageUpload,
+  //   }
+  //   corpModal.result.then((result : any)=>{
+  //     console.log(result);
+  //   })
+  // }
 
   initForm(){
     this.filterForm = this.build.group({
