@@ -73,7 +73,7 @@ const routes: Routes = [
         // canActivate:[AtelierGuard,AuthGuard]
       },
       {
-        path:'invoice/create',
+        path:'facture/create',
         component:InvoiceComponent
        }
     ]
