@@ -8,7 +8,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { MaterialModule } from './material/material.module';
-// import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgChartsModule } from 'ng2-charts';
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { NgxDropzoneModule } from 'ngx-dropzone';
+
 
 import{ReceiveCarModule} from './receive-car/receive-car.module';
 import {ReceiveCarRoutingModule} from './receive-car/receive-car-routing.module';
@@ -29,12 +33,10 @@ import { DeniedAccessComponent } from './error-page/denied-access/denied-access.
 import { LineAverageChartComponent } from './chart/line-average-chart/line-average-chart.component';
 import { BarChartComponent } from './chart/bar-chart/bar-chart.component';
 import { SimulationChartComponent } from './chart/simulation-chart/simulation-chart.component';
-import { CorpImageComponent } from './modal/corp-image/corp-image.component';
 
 import { httpInterceptorProviders } from './helpers/auth.interceptor';
-import { NgChartsModule } from 'ng2-charts';
-import { ImageCropperModule } from 'ngx-image-cropper';
-
+import { CorpImageComponent } from './modal/corp-image/corp-image.component';
+import { OptionComponent } from './modal/option/option.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +58,8 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     SimulationChartComponent,
     InoviceComponent,
     FormCarComponent,
-    CorpImageComponent
+    CorpImageComponent,
+    OptionComponent
   ],
   imports: [
     BrowserModule,
@@ -70,7 +73,8 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     NgChartsModule,
     ReceiveCarModule,
     ReceiveCarRoutingModule,
-    // NgbModule,
+    NgbModule,
+    NgxDropzoneModule,
     ImageCropperModule
   ],
   providers: [
@@ -83,4 +87,4 @@ export class AppModule {
   constructor() {
     registerLocaleData(fr.default);
   }
-}
+} 

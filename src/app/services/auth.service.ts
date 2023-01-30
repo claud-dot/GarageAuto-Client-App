@@ -17,8 +17,6 @@ export class AuthService {
   constructor(private http : HttpClient , private storage : StorageService) { }
 
   isLoggedIn(){
-    console.log(this.storage.getCookie('garazeAuto-session'));
-    
     return this.storage.get('USER_KEY');
   }
 

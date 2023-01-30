@@ -4,22 +4,29 @@
   </div>
   <div class="modal-body" >
     <article>
-      <!-- <image-cropper 
+      <image-cropper 
         [imageChangedEvent]="imageChangedEvent" 
         [maintainAspectRatio]="true" 
-        [aspectRatio]="croperOptions.ratio"
-        [resizeToWidth]="croperOptions.toWidth"
-        [resizeToHeight]="croperOptions.toHeight"
+        [aspectRatio]="687/125"
+        [resizeToWidth]="1374"
+        [resizeToHeight]="250"
         [hideResizeSquares]="true"
         format="png" 
         (imageCropped)="imageCropped($event)" 
         (imageLoaded)="imageLoaded()"
         (cropperReady)="cropperReady()" 
         (loadImageFailed)="loadImageFailed()">
-      </image-cropper> -->
+      </image-cropper>
     </article>
   </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-default" (click)="closeModal('accept')">Save</button>
+  <div class="modal-footer" *ngIf="!loading.update">
+    <button type="button" class="btn btn-default" (click)="onSaveImageCar()">Save</button>
     <button type="button" class="btn btn-default" (click)="closeModal('refuse')">Close</button>
+  </div>
+  <div class="modal-footer" *ngIf="loading.update">
+    <button disabled type="button" class="btn btn-default">
+      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      Loading...
+    </button>
+    <button type="button" class="btn btn-default" disabled>Close</button>
   </div>

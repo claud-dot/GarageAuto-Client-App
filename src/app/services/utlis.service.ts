@@ -14,9 +14,7 @@ declare var $: any;
 })
 export class UtlisService {
 
-  constructor(private authService : AuthService, private toastr : ToastrService , private router:Router , private storage : StorageService) {
-
-  }
+  constructor(private authService : AuthService, private toastr : ToastrService , private router:Router , private storage : StorageService) {}
 
   Login(userData : any , loading : any){
     loading.login = true;

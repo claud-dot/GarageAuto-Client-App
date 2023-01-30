@@ -1,25 +1,55 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {Repair} from '../repair';
 import {ReceiveCarService} from '../receive-car.service';
 import { ActivatedRoute, Router} from '@angular/router'
+import { FormControl, FormArray, FormGroup, FormBuilder } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-receive-car-list',
   templateUrl: './receive-car-list.component.html',
-  styleUrls: ['./receive-car-list.component.css']
+  styleUrls: ['./receive-car-list.component.css', '../../components/home/car/car.component.css']
 })
-export class ReceiveCarListComponent {
+export class ReceiveCarListComponent implements OnInit {
   repairs:Repair[]=[];
-  constructor(public receiveCarService:ReceiveCarService,private router: Router){}
+  formSearch : FormGroup;
+  formCtrlSub : Subscription;
+
+  constructor(public receiveCarService:ReceiveCarService,private router: Router , private build : FormBuilder){}
   
+  navigateToInvoice(){
+    this.router.navigate(['/home/invoice/create']);
+  }
+
+  initForm(){
+    this.formSearch = this.build.group({
+      filter : new FormControl(null),
+      text : new FormControl(null),
+      dates : this.build.array([])
+    });
+    this.initDateInter();
+  }
+
+  get dates(): FormArray {
+		return this.formSearch.get('dates') as FormArray;
+	}
+
+  initDateInter(){
+    const formArray = this.dates;
+    if(formArray){
+      formArray.push(this.build.group({
+        start : new FormControl(''),
+        end : new FormControl(''),
+      }))
+    }
+  }
+
   ngOnInit(){
+    this.initForm();
     this.receiveCarService.getAll().subscribe((data:Repair[])=>{
       console.log(data);
       this.repairs=data;
     },
     ); 
-  }
-  navigateToInvoice(){
-    this.router.navigate(['/home/invoice/create']);
   }
 }

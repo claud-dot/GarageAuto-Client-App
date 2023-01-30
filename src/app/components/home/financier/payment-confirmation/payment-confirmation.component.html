@@ -1,7 +1,7 @@
 <div class="row content-reparation">
     <div class="content-head">
         <div class="content-form-search">
-            <h2>Liste Payements</h2>
+            <h2 class="title-h2">Liste Payements</h2>
         </div>
     </div>
     <div class="grand-spin" *ngIf="loading.payment">
@@ -11,8 +11,8 @@
         <div [ngClass]="repair.status==1 ? 'bck-incomplete' : 'bck-complete'" style="cursor: pointer;" [routerLink]="['/home/invoice/'+repair._id]" class="card mb-3 card-body" *ngFor="let repair of payments">
             <div class="row align-items-center">
                 <div class="col-auto">
-                    <a href="#!.html">
-                      <img src="http://via.placeholder.com/280x280" class="width-90 rounded-3" alt="">
+                    <a routerLink="/">
+                        <img [src]="repair.user_cars.img_url ? repair.user_cars.img_url : 'http://via.placeholder.com/280x280'" class="width-90 rounded-3" alt="">
                     </a>
                 </div>
                 <div class="col">
@@ -21,9 +21,6 @@
                             <h6 class="mb-1">
                                 <span style="font-weight: 600;">Marque :  </span><a class="text-reset">{{repair.user_car.mark}}</a>
                             </h6>
-                            <!-- <h6 class="status-text">
-                                <span [class]="repair.status ==0 ? 'text-reset' : '' ">{{getStatusRepair(repair.status)+' ...'}}</span>
-                            </h6> -->
                         </div>
                         <div class="other-car-detail">
                             <div class="content-detail">

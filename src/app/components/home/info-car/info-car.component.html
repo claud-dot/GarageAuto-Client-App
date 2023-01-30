@@ -1,69 +1,75 @@
-<div class="head-story card mb-3">
-    <img class="card-img-top" src="http://via.placeholder.com/894x100" alt="Card image cap">
-    <div class="card-body">
-      <div *ngIf="!loading.car">
-          <h5 class="card-title"><span style="font-weight: 600;">Marque : </span>{{data.car.mark}}</h5>
-          <p class="card-text"><span style="font-weight: 600;">Model : </span>{{data.car.model}}</p>
-          <p class="card-text"><small class="text-muted" style="font-weight: 600;">Année de fabrication : </small>{{data.car.year_of_manufacture}}</p>
-          <p class="card-text"><small class="text-muted" style="font-weight: 600;" >Crée : </small> {{data.car.create_at | date : ' le d MMMM yyyy' }}</p>
-      </div>
-      <div class="content-spinner" *ngIf="loading.car">
-        <mat-spinner></mat-spinner>
-      </div>
-    </div>
+<div class="content-spinner" *ngIf="loading.car || loading.story">
+    <mat-spinner></mat-spinner>
 </div>
-<div class="container-mb">
-    <div class="table-responsive">
-        <div class="table-wrapper">
-            <h2 style="font-size: 28px;font-weight: 500;">Historique des reparation</h2>
-            <div class="table-filter mb-2" >
-                <div class="row" style="display: flex; justify-content: flex-end;">
-                    <div class="col-sm-9">
-                        <div class="filter-group">
-                            <form [formGroup]="filterForm">
-                                <div class="form-floating">
-                                    <select class="form-select" formControlName="status" (change)="onFilterStory()" id="floatingSelect" aria-label="Floating label select example">
-                                        <option selected >Tous *</option>
-                                        <option *ngFor="let statut of status" [value]="statut.value">{{statut.name}}</option>
-                                    </select>
-                                    <label for="floatingSelect">Status</label>
-                                </div>
-                            </form>
+<div *ngIf="!loading.car && !loading.story">
+    <div  class="head-story card mb-3"  >
+        <div class="content-img" style="width: 100%; height: 100%;" ngx-dropzone (change)="onChangeCarImage($event , data.car._id)" accept="image/*" matTooltip="Clicker ou glisser votre photo"aria-label="Button that displays a tooltip when focused or hovered over">
+            <article>
+                <img class="card-img-top" [src]="data.car.img_url ? data.car.img_url : 'http://via.placeholder.com/1374x250'" alt="Card image cap">
+                <div class="content-icon">
+                    <img src="assets/images/icons/photo.svg">
+                </div>
+            </article>
+        </div>
+        <div class="card-body">
+          <!-- <div *ngIf="!loading.car"> -->
+              <h5 class="card-title"><span style="font-weight: 600;">Marque : </span>{{data.car.mark}}</h5>
+              <p class="card-text"><span style="font-weight: 600;">Model : </span>{{data.car.model}}</p>
+              <p class="card-text"><small class="text-muted" style="font-weight: 600;">Année de fabrication : </small>{{data.car.year_of_manufacture}}</p>
+              <p class="card-text"><small class="text-muted" style="font-weight: 600;" >Crée : </small> {{data.car.create_at | date : ' le d MMMM yyyy' }}</p>
+          <!-- </div> -->
+        </div>
+    </div>
+    <div class="container-mb">
+        <div class="table-responsive">
+            <div class="table-wrapper">
+                <h2 class="title-h2">Historique des reparation</h2>
+                <div class="table-filter mb-2" >
+                    <div class="row" style="display: flex; justify-content: flex-end;">
+                        <div class="col-sm-9">
+                            <div class="filter-group">
+                                <form [formGroup]="filterForm">
+                                    <div class="form-floating">
+                                        <select class="form-select" formControlName="status" (change)="onFilterStory()" id="floatingSelect" aria-label="Floating label select example">
+                                            <option selected >Tous *</option>
+                                            <option *ngFor="let statut of status" [value]="statut.value">{{statut.name}}</option>
+                                        </select>
+                                        <label for="floatingSelect">Status</label>
+                                    </div>
+                                </form>
+                            </div>
+                            <span class="filter-icon"><i class="fa fa-filter"></i></span>
                         </div>
-                        <span class="filter-icon"><i class="fa fa-filter"></i></span>
                     </div>
                 </div>
-            </div>
-            <div class="scroll-data">
-                <table class="table table-striped table-hover">
-                    <thead>
-                        <tr>
-                            <th>Date debut de reparation</th>						
-                            <th>Date fin de reparation</th>						
-                            <th>Status</th>						
-                            <th>Montant net</th>
-                        </tr>
-                    </thead>
-                    <tbody *ngIf="!loading.story">
-                        <tr *ngFor=" let story of data.story">
-                            <td>{{story.repair_at | date}}</td>                        
-                            <td>{{story.finish_at | date}}</td>                        
-                            <td><span [class]="getAboutStatus(story.status).class">&bull;</span>{{getAboutStatus(story.status).name}}</td>
-                            <td>$254</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="content-spinner" *ngIf="loading.story">
-                    <mat-spinner></mat-spinner>
+                <div class="scroll-data">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Date debut de reparation</th>						
+                                <th>Durée de reparation</th>						
+                                <th>Status</th>						
+                                <th>Montant net</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor=" let story of data.story ; let i = index">
+                                <td>{{data.invoices[i].hasOwnProperty("status") ? (story.repair_at | date) : "Indefini" }}</td>                        
+                                <td>{{data.invoices[i].hasOwnProperty("status") ? (data.invoices[i].duration +" "+ data.invoices[i].unit_duration) : "Indefini"}}</td>                        
+                                <td><span [class]="getAboutStatus(story.status).class">&bull;</span>{{getAboutStatus(story.status).name}}</td>
+                                <td>{{data.invoices[i].hasOwnProperty("status") ? getMontantRepair(data.invoices[i].results_comment)+" Ar" : "Indefini"}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
+                <mat-paginator *ngIf="metadata"
+                    [length]="metadata.total"
+                    [pageSize]="dataStory.nbBypage"
+                    [pageSizeOptions]="[5, 10]"
+                    (page)="onPageChange($event)"
+                    aria-label="Select page">
+                </mat-paginator>
             </div>
-            <mat-paginator *ngIf="metadata"
-                [length]="metadata.total"
-                [pageSize]="dataStory.nbBypage"
-                [pageSizeOptions]="[5, 10]"
-                (page)="onPageChange($event)"
-                aria-label="Select page">
-            </mat-paginator>
-        </div>
-    </div>        
+        </div>        
+    </div>
 </div>
