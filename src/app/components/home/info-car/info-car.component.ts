@@ -1,9 +1,12 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute } from '@angular/router';
+import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { CorpImageComponent } from 'src/app/modal/corp-image/corp-image.component';
 import { CarService } from 'src/app/services/car.service';
+import { ImageService } from 'src/app/services/image.service';
 import { UtlisService } from 'src/app/services/utlis.service';
 
 @Component({
@@ -13,6 +16,8 @@ import { UtlisService } from 'src/app/services/utlis.service';
 })
 export class InfoCarComponent implements OnInit {
 
+  imageUpload : any;
+  urlImagePub : string='';
   filterForm : FormGroup;
   car_id : string;
   data : any = {};
@@ -27,9 +32,38 @@ export class InfoCarComponent implements OnInit {
       { name : "Recuperée" ,value : 4  , class : 'text-secondary'},
   ]
 
-  constructor(private carService :  CarService , private utilsService: UtlisService , private router : ActivatedRoute , private build : FormBuilder) {
-    this.car_id = this.router.snapshot.params['id_car']
+  constructor(private carService :  CarService ,
+              private utilsService: UtlisService ,
+              private router : ActivatedRoute ,
+              private build : FormBuilder,
+              private changeDetector : ChangeDetectorRef, 
+              private modalService : NgbModal) {
+    this.car_id = this.router.snapshot.params['id_car'];
     this.dataStory = { car_id : this.car_id , ...this.dataStory };
+  }
+
+  onChangeCarImage(event : any , car_id : string){
+    const options : NgbModalOptions  = {
+      backdrop : 'static',
+      keyboard : false,
+      centered: true
+    }
+   
+    const corpModal = this.modalService.open(CorpImageComponent , options);
+    corpModal.componentInstance.dataImage={
+       event : {
+        target : {
+          files : event.addedFiles,
+        }
+      },
+      car_user :  car_id
+    }
+    corpModal.result.then((result : any)=>{
+      if(result.status == 200){
+        this.urlImagePub = result.data;
+        this.data.car.img_url = result.data;
+      }
+    })
   }
 
   initForm(){
@@ -57,11 +91,11 @@ export class InfoCarComponent implements OnInit {
   getStoryRepairCar(){
     this.loading.story = true;
     const success = (story : any)=>{
-      this.metadata =story.metadata[0];
-      console.log(this.metadata);
-      
-      this.data.story = story.data;
+      this.metadata =story.repairs.metadata[0];
+      this.data.invoices = story.invoices;
+      this.data.story = story.repairs.data;
       this.loading.story = false;
+      
     }
 
     const error = (error : HttpErrorResponse)=>{
@@ -71,6 +105,10 @@ export class InfoCarComponent implements OnInit {
       this.loading.story = false;
     }
     this.carService.getStoryCarRepair(this.dataStory).subscribe(success,error);
+  }
+
+  getMontantRepair(result_repair : []){
+    return result_repair.reduce((acc, result : any) => acc + (result.unit_price * result.qt), 0);
   }
 
   getAboutStatus(status :number){
@@ -94,7 +132,6 @@ export class InfoCarComponent implements OnInit {
     }
     this.carService.getCar(this.car_id).subscribe(success,error)
   }
-
 
   ngOnInit(): void {
     this.initForm();

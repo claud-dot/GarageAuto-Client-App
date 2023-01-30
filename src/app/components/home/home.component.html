@@ -1,7 +1,7 @@
     
     <div class="wrapper d-flex align-items-stretch">
         <nav id="sidebar" class="active">
-            <h1><a href="index.html" class="logo">M.</a></h1>
+            <h1><a [routerLink]="['home']" class="logo">M.</a></h1>
     <ul class="list-unstyled components mb-5">
       <li *ngFor="let link of linkApp">
         <a [routerLink]="[link.routeLink]"><span [class]="link.icon"></span>{{link.name}}</a>
@@ -15,9 +15,7 @@
     </ul>
     
     <div class="footer">
-        <p>
-            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib.com</a>
-        </p>
+        <p> Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This site is develloped <i class="icon-heart" aria-hidden="true"></i> by <a href="https://www.ituniversity-mg.com/page/news/rentree-de-la-promo-12-b-le-23-nov-a-9h30/" target="_blank">Tomboanjara Claudio</a> </p>
     </div>
     </nav>
     
@@ -54,7 +52,10 @@
       </div>
     </nav>
         <div class="content-user">
-            <router-outlet></router-outlet>
+            <div class="grand-spin" *ngIf="loading.cookie">
+              <mat-spinner></mat-spinner>
+            </div>
+            <router-outlet *ngIf="!loading.cookie"></router-outlet>
         </div>
     </div>
 </div>
