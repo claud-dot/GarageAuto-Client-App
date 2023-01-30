@@ -35,8 +35,7 @@ export class SignupComponent {
         role : new FormControl(null , Validators.required),
         password : new FormControl( null , Validators.compose([
             Validators.required,
-            Validators.pattern(/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W)/),
-            Validators.minLength(4)
+            Validators.pattern(/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W)/)
         ]))
     })
   }
@@ -53,6 +52,7 @@ export class SignupComponent {
     this.loading.role = true;
     const success = (roles : any)=>{
       this.user_role = roles;
+      this.signUpForm.controls['role'].setValue(roles[0].role);
       this.loading.role = false;
     }
 

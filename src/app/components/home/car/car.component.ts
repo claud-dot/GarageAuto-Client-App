@@ -7,6 +7,8 @@ import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PageEvent } from '@angular/material/paginator';
 import { debounceTime, Subscription } from 'rxjs';
+import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { OptionComponent } from 'src/app/modal/option/option.component';
 
 declare var $: any;
 
@@ -37,6 +39,7 @@ export class CarComponent implements OnInit {
     private userService : UserService, 
     private utilsService : UtlisService ,
     private router : Router,
+    private modalService : NgbModal,
     private utils: UtlisService){}
   
   initForm(){
@@ -131,6 +134,23 @@ export class CarComponent implements OnInit {
     this.userService.addCar_user(formAddCar.value).subscribe(success, error);
   }
 
+  onDeleteCar(id_car: string){
+    this.loading.delete = true;
+    const success = (response : any)=>{
+      this.utils.openToastr(response.message , "Delete car message" , 'success');
+      this.loading.delete = false;
+      this.getUser_cars();
+    }
+
+    const error = (error : HttpErrorResponse)=>{
+      this.utils.openToastr(error.error.message , "Delete car message" , 'error');
+      console.log("Delete car "+error.error);
+      console.log("status "+error.status);
+      this.loading.delete = false;
+    }
+    this.userService.deleteCar({id_car : id_car}).subscribe(success,error);
+  }
+
   onPageChange(event : PageEvent){
     const startIndex = event.pageIndex * event.pageSize;
     let endIndex = startIndex + event.pageSize;
@@ -143,6 +163,7 @@ export class CarComponent implements OnInit {
     this.formCtrlSub = this.formSearch.valueChanges
     .pipe(debounceTime(500))
     .subscribe(value => {
+        this.dataCar.page = 1;
         if(!this.formSearch.value['filter']?.includes('_at') && this.formSearch.value['text']!=null){
           this.dataCar.search = value;
           this.getUser_cars();
@@ -155,6 +176,24 @@ export class CarComponent implements OnInit {
 
   scrollTo(section : string){
     document.querySelector("#"+section)?.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
+  }
+
+  openDialodg(id_car : string){
+    const options : NgbModalOptions  = {
+      backdrop : 'static',
+      keyboard : false,
+      centered: true
+    }
+    
+    const optionModal = this.modalService.open(OptionComponent , options);
+    optionModal.componentInstance.dataImage={
+      car_user :  id_car
+    }
+    optionModal.result.then((result : any)=>{
+      if(result){
+        this.onDeleteCar(id_car);
+      }
+    })
   }
 
   onDepotCar(carData : any){

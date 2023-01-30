@@ -35,13 +35,14 @@ export class LoginComponent {
         ])),
         role : new FormControl(null , Validators.required),
         password : new FormControl(null , Validators.required)
-      })
+      });
     }
 
     getRoles(){
       this.loading.role = true;
       const success = (roles : any)=>{
         this.user_roles = roles;
+        this.loginForm.controls['role'].setValue(roles[0].role);
         this.loading.role = false;
       }
 
@@ -57,7 +58,7 @@ export class LoginComponent {
     }
 
     ngOnInit(){
-      this.getRoles();
       this.initForm();
+      this.getRoles();
     }
 }

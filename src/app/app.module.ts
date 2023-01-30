@@ -1,4 +1,3 @@
-import { AuthGuard } from './guards/auth.guard';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import * as fr from '@angular/common/locales/fr';
@@ -9,6 +8,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { MaterialModule } from './material/material.module';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgChartsModule } from 'ng2-charts';
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { NgxDropzoneModule } from 'ngx-dropzone';
+
 
 import{ReceiveCarModule} from './receive-car/receive-car.module';
 import {ReceiveCarRoutingModule} from './receive-car/receive-car-routing.module';
@@ -19,8 +23,6 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
 import { RepairComponent } from './components/home/repair/repair.component';
 import { CarComponent } from './components/home/car/car.component';
-
-import { httpInterceptorProviders } from './helpers/auth.interceptor';
 import { CarDepotComponent } from './components/home/car-depot/car-depot.component';
 import { FormCarComponent } from './components/home/form-car/form-car.component';
 import { InfoCarComponent } from './components/home/info-car/info-car.component';
@@ -29,10 +31,12 @@ import { PaymentConfirmationComponent } from './components/home/financier/paymen
 import { StatisticComponent } from './components/home/financier/statistic/statistic.component';
 import { DeniedAccessComponent } from './error-page/denied-access/denied-access.component';
 import { LineAverageChartComponent } from './chart/line-average-chart/line-average-chart.component';
-import { NgChartsModule } from 'ng2-charts';
 import { BarChartComponent } from './chart/bar-chart/bar-chart.component';
 import { SimulationChartComponent } from './chart/simulation-chart/simulation-chart.component';
 
+import { httpInterceptorProviders } from './helpers/auth.interceptor';
+import { CorpImageComponent } from './modal/corp-image/corp-image.component';
+import { OptionComponent } from './modal/option/option.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +57,9 @@ import { SimulationChartComponent } from './chart/simulation-chart/simulation-ch
     BarChartComponent,
     SimulationChartComponent,
     InoviceComponent,
-    FormCarComponent
+    FormCarComponent,
+    CorpImageComponent,
+    OptionComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +72,10 @@ import { SimulationChartComponent } from './chart/simulation-chart/simulation-ch
     MaterialModule,
     NgChartsModule,
     ReceiveCarModule,
-    ReceiveCarRoutingModule
+    ReceiveCarRoutingModule,
+    NgbModule,
+    NgxDropzoneModule,
+    ImageCropperModule
   ],
   providers: [
     httpInterceptorProviders,
@@ -78,4 +87,4 @@ export class AppModule {
   constructor() {
     registerLocaleData(fr.default);
   }
-}
+} 

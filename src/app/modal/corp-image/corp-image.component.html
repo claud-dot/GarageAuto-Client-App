@@ -1,0 +1,32 @@
+<div class="modal-header">
+    <h4 class="modal-title">Image Cropper</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="closeModal('close')"></button>
+  </div>
+  <div class="modal-body" >
+    <article>
+      <image-cropper 
+        [imageChangedEvent]="imageChangedEvent" 
+        [maintainAspectRatio]="true" 
+        [aspectRatio]="687/125"
+        [resizeToWidth]="1374"
+        [resizeToHeight]="250"
+        [hideResizeSquares]="true"
+        format="png" 
+        (imageCropped)="imageCropped($event)" 
+        (imageLoaded)="imageLoaded()"
+        (cropperReady)="cropperReady()" 
+        (loadImageFailed)="loadImageFailed()">
+      </image-cropper>
+    </article>
+  </div>
+  <div class="modal-footer" *ngIf="!loading.update">
+    <button type="button" class="btn btn-default" (click)="onSaveImageCar()">Save</button>
+    <button type="button" class="btn btn-default" (click)="closeModal('refuse')">Close</button>
+  </div>
+  <div class="modal-footer" *ngIf="loading.update">
+    <button disabled type="button" class="btn btn-default">
+      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      Loading...
+    </button>
+    <button type="button" class="btn btn-default" disabled>Close</button>
+  </div>

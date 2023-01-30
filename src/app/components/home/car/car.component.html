@@ -1,6 +1,6 @@
 <div>
   <div class="head-car">
-    <h2>Liste de mes voitures</h2>
+    <h2 class="title-h2">Liste de mes voitures</h2>
     <div class="content-form-search">
       <form [formGroup]="formSearch">
         <div class="search-form">
@@ -52,7 +52,11 @@
             <button class="btn btn-sm btn-outline-info" [routerLink]="['/home/info-car/'+car._id]">Info</button>
           </td>
           <td>
-            <button class="btn btn-sm btn-outline-danger">Supprimer</button>
+            <button *ngIf="!loading.delete" (click)="openDialodg(car._id)" class="btn btn-sm btn-outline-danger">Supprimer</button>
+            <button *ngIf="loading.delete" disabled class="btn btn-sm btn-outline-danger">
+              <span class="spinner-border spinner-border-sm mt-1" role="status" aria-hidden="true"></span>
+               Loading...
+            </button>
           </td>
         </tr>
       </tbody>
