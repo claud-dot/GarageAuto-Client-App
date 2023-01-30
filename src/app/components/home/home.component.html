@@ -6,9 +6,9 @@
       <li *ngFor="let link of linkApp">
         <a [routerLink]="[link.routeLink]"  routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" ><span [class]="link.icon"></span>{{link.name}}</a>
       </li>
-      <li>
+      <!-- <li>
         <a [routerLink]="['receiveCar']"><span class="fa fa-paper-plane"></span> Réception</a>
-      </li>
+      </li> -->
       <li>
         <a style="cursor: pointer;" (click)="LogOut()"><span class="fa fa-sign-out" ></span>Sign Out</a>
       </li> 
