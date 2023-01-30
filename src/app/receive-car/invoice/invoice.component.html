@@ -1,49 +1,125 @@
-<div class="row">
-    <div class="col-3 mx-auto">
-        <h1>Facture</h1>
+<div class="container-fluid">
+    <div class="row ligne-facture mb-5">
+        <div class="col-3 mx-auto">
+            <h1>Facture <i class="fa fa-book icone-facture"></i></h1>
+        </div>
     </div>
+    <div>
+        <div class="row mb-1">
+            <div class="col">
+                <h5>Nom:-</h5>
+            </div>
+        </div>
+        <div class="row mb-1">
+            <div class="col">
+                <h5>Prenom:-</h5>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col">
+                <h5>Mail:{{user.email}}</h5>
+            </div>
+        </div>
+    </div>
+    <form [formGroup]="form" (ngSubmit)="addData()">
+        <div class="row">
+            <div class="col">
+                <input formControlName="description" class="form-control" placeholder="Description">
+                <div *ngIf="form.controls['description'].invalid && form.controls['description'].touched"
+                    class="text-danger">la déscription est requis</div>
+            </div>
+            <div class="col">
+                <input formControlName="quantite" class="form-control" placeholder="Quantité">
+                <div *ngIf="form.controls['quantite'].invalid && form.controls['quantite'].touched" class="text-danger">
+                    la quantité est requis et doit être numérique</div>
+            </div>
+            <div class="col">
+                <input formControlName="prix_unitaire" class="form-control" placeholder="Prix unitaire">
+                <div *ngIf="form.controls['prix_unitaire'].invalid && form.controls['prix_unitaire'].touched"
+                    class="text-danger">le prix est requis et doit être numérique</div>
+            </div>
+            <div class="col">
+                <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Ajouter</button>
+            </div>
+        </div>
+    </form>
+
+    <hr>
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-primary table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Déscription</th>
+                        <th scope="col">Quantité</th>
+                        <th scope="col">Prix Unitaire(AR)</th>
+                        <th scope="col">Prix Total(AR)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of tableData">
+                        <td>{{data.line_number}}</td>
+                        <td>{{data.description}}</td>
+                        <td>{{ data.quantite }}</td>
+                        <td>{{ data.prix_unitaire }}</td>
+                        <td>{{ data.prix_total }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            <div class="col-4 offset-9">
+                <h3>Total HT:{{sub_total}}(Ar)</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4 offset-9">
+                <h3>TVA(20%):{{tva}}(Ar)</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4 offset-9">
+                <h3>Total TTC:{{total}}(Ar)</h3>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-4 offset-8">
+            <button class="btn btn-primary btn-block" (click)="openModal(modalContent)">Envoyer</button>
+        </div>
+    </div>
+
 </div>
-<div class="row">
-    <div class="col-3">
-        <input [(ngModel)]="newRowValue">
+<ng-template #modalContent let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Durée de réparation</h4>
+        <button type="button" class="close" (click)="modal.dismiss()">&times;</button>
     </div>
-    <div class="col-3">
-        <button (click)="addRow()">Add Row</button>
-    </div>
-</div>
-<hr>
-<div class="row">
-    <div class="col-12">
-        <table class="table table-primary table-striped" [ngStyle]="tableStyles">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Déscription</th>
-                    <th scope="col">Quantité</th>
-                    <th scope="col">Prix Unitaire</th>
-                    <th scope="col">Prix Total</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
+    <form [formGroup]="form_duration">
+        <div class="modal-body">
+
+            <div class="form-group">
+                <label for="duration">Valeur</label>
+                <input formControlName="duration" class="form-control" placeholder="Duration" required>
+                <div *ngIf="form_duration.controls['duration'].invalid && form_duration.controls['duration'].touched" class="text-danger">la déscription est requis</div>
+
+            </div>
+            <div class="form-group">
+              <label for="durationType">Unité</label>
+              <select class="form-control" formControlName="durationType" name="durationType" required>
+                <option value="jour">jour</option>
+                <option value="mois">mois</option>
+              </select>
+              <div *ngIf="form_duration.controls['durationType'].invalid && form_duration.controls['durationType'].touched" class="text-danger">la déscription est requis</div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" (click)="sendInvoice('voir')">Voir</button>
+            <button type="button" class="btn btn-success" [disabled]="form_duration.invalid" (click)="sendInvoice('envoyer')">Valider</button>
+            <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Annuler</button>
+        </div>
+    </form>
+
+</ng-template>

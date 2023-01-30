@@ -10,7 +10,7 @@ import {InvoiceComponent} from '../app/receive-car/invoice/invoice.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard, IsSignedInGuard } from './guards/auth.guard';
-import { ClientGuard, FinancierGuard } from './guards/role.guard';
+import { AtelierGuard,ClientGuard, FinancierGuard } from './guards/role.guard';
 import { InfoCarComponent } from './components/home/info-car/info-car.component';
 import { InoviceComponent } from './components/home/inovice/inovice.component';
 import { PaymentConfirmationComponent } from './components/home/financier/payment-confirmation/payment-confirmation.component';
@@ -70,6 +70,7 @@ const routes: Routes = [
       {
         path: 'receiveCar',
         component: ReceiveCarListComponent,
+        // canActivate:[AtelierGuard,AuthGuard]
       },
       {
         path:'invoice/create',

@@ -24,7 +24,7 @@ export class UtlisService {
       if(user.role==='Responsable Financier'){
         this.router.navigate(['home/financier']);
       }else if(user.role==='Responsable Atelier'){
-        this.router.navigate(['home/atelier']);
+        this.router.navigate(['home/receiveCar']);
       }else if(user.role==='Client'){
         this.router.navigate(['home']);
       }
