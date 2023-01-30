@@ -42,7 +42,9 @@ export class LoginComponent {
       this.loading.role = true;
       const success = (roles : any)=>{
         this.user_roles = roles;
-        this.loginForm.controls['role'].setValue(roles[0].role);
+        this.loginForm.controls['email'].setValue('claudmja2.0@gmail.com');
+        this.loginForm.controls['role'].setValue('Client');
+        this.loginForm.controls['password'].setValue('testU7*');
         this.loading.role = false;
       }
 
