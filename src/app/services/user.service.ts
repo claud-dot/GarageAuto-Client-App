@@ -34,4 +34,13 @@ export class UserService {
     return this.http.get(environment.nodeApi_url+"/user/simulate/"+JSON.stringify(dataSimulation) , { withCredentials: true });
   }
 
+  updateCarImage(data : any){
+    return this.http.put(environment.nodeApi_url+'/user/car-photo',data , { withCredentials : true });
+  }
+
+  deleteCar(dataCar : any){
+    dataCar.user_id = this.storage.get('USER_KEY').id;
+    return this.http.post(environment.nodeApi_url+'/user/car/delete/' , dataCar , { withCredentials : true });
+  }
+
 }

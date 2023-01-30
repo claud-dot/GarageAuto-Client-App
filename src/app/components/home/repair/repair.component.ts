@@ -3,12 +3,13 @@ import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 import { debounceTime, Subscription } from 'rxjs';
 import { CarService } from 'src/app/services/car.service';
+import { ImageService } from 'src/app/services/image.service';
 import { UtlisService } from 'src/app/services/utlis.service';
 
 @Component({
   selector: 'app-repair',
   templateUrl: './repair.component.html',
-  styleUrls: ['./repair.component.css']
+  styleUrls: ['./repair.component.css','../car/car.component.css']
 })
 export class RepairComponent implements OnInit {
   repairs : any;
@@ -23,21 +24,22 @@ export class RepairComponent implements OnInit {
     { name: 'Modele' , value:'model'},
     { name:  'Date de reparation' , value:'create_at'},
   ];
-  status = [
-    { name : "En attent de facture" , value : 0},
-    { name : "Facture attent validation" , value : 1},
-    { name : "En reparation" , value : 2},
-    { name : "En attent de recuperation" , value : 3},
-    { name : "Recuperé" , value : 4}
-  ] 
+  status : any  = [ 
+    { name : "En attente de facture" ,value : 0  , class :'status text-danger'},
+    { name : "Facture attente de validation" ,value : 1  , class :'status text-warning'},
+    { name : "En reparation" ,value :2  , class :'status text-info' },
+    { name : "En attente de recuperation" ,value : 3  , class :'status text-success'},
+    { name : "Recuperée" ,value : 4  , class : 'text-secondary'},
+] 
 
-  constructor(private carService : CarService ,private utils : UtlisService ,  private build: FormBuilder) {}
+  constructor(private carService : CarService ,private utils : UtlisService ,  private build: FormBuilder , private imageService: ImageService) {}
   
 
   getCarRepair(){
     this.loading.cars_repair = true;
     const success = (repairs : any)=>{
       this.metadata = repairs.metadata[0];
+      this.imageService.resizeAllImage(repairs.data , 280 , 280);
       this.repairs = repairs;
       this.loading.cars_repair = false;
     }
@@ -51,14 +53,13 @@ export class RepairComponent implements OnInit {
     this.carService.getUserCarRepair(this.dataRepair).subscribe(success, error);
   }
 
-  getStatusRepair(status : number){
-    return this.status.find((stat : any)=> stat.value == status)?.name;
+  getAboutStatus(status :number){
+    return this.status.find((stat: any)=> stat.value == status);
   }
 
   onPageChange(event : PageEvent){
     const startIndex = event.pageIndex * event.pageSize;
     let endIndex = startIndex + event.pageSize;
-    console.log(startIndex , endIndex, event.length , event.previousPageIndex);
     this.dataRepair.nbBypage = endIndex-startIndex;
     this.dataRepair.page = endIndex/this.dataRepair.nbBypage;
     this.getCarRepair();
@@ -85,6 +86,7 @@ export class RepairComponent implements OnInit {
   }
 
   checkValue(value : any){
+    this.dataRepair.page=1;
     if(value){
       if(value.filterCar?.includes('_at')){
         value.text = null;
