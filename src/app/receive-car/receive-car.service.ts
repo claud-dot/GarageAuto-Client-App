@@ -5,6 +5,7 @@ import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 
 import {Repair} from './repair';
+import { User } from './user';
 @Injectable({
   providedIn: 'root'
 })
@@ -20,5 +21,9 @@ export class ReceiveCarService {
 
   getAll():Observable<Repair[]>{
     return this.httpClient.get<Repair[]>(this.apiServer+'list');
+  }
+
+  getUserById(id_user : string):Observable<User>{
+    return this.httpClient.get<User>(this.apiServer+'/user/get/'+id_user);
   }
 }

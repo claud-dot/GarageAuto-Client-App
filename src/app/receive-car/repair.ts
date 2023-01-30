@@ -1,6 +1,7 @@
 export interface Repair {
+    _id : string,
     user_car:{
-        user_id:string,
+        user_id : string,
         mark:string,
         model:string
     },

@@ -1,31 +1,4 @@
 <div class="content-receive">
-  <div class="head-car">
-    <h2 class="title-h2">Liste des demandes</h2>
-    <div class="content-form-search">
-      <form [formGroup]="formSearch">
-        <div class="search-form">
-          <div class="select-search separate mb-3">
-            <label for="filtre">Filtre</label>
-            <select formControlName="filter">
-              <!-- <option *ngFor="let head of headsTab;"  [value]="head.value" >{{head.name}}</option> -->
-            </select>
-          </div>
-          <div class="input-search separate mb-3" *ngIf="!formSearch.value['filter']?.includes('creat') && !formSearch.value['filter']?.includes('update')">
-            <label for="filtre">Text</label>
-            <input type="text" formControlName="text" >
-            <i><span class="fa fa-search"></span></i>
-          </div>
-          <div class="input-date separate mb-3" formArrayName="dates" *ngIf="formSearch.value['filter']?.includes('creat') ||formSearch.value['filter']?.includes('update')">
-            <label for="filtre">Date</label>
-            <div [formGroupName]="0" *ngFor="let date of dates.controls">
-              <input  #start (focus)="start.type='date'" type="text" formControlName="start"/>
-              <input #end type="text" (focus)="end.type='date'" formControlName="end"/>
-            </div>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
   <div class="scroll-data" >
     <table class="table table-responsive-md table-hover tab-scroll" >
       <thead>
@@ -45,7 +18,7 @@
           <td>{{repair.user_car.mark}}</td>
           <td>{{repair.user_car.model}}</td>
           <td>{{repair.comment}}</td>
-          <td><button type="button" (click)="navigateToInvoice()" class="btn btn-outline-success btn-sm">Facture</button></td>
+          <td><button type="button" (click)="navigateToInvoice(repair.user_car.user_id,repair._id)" class="btn btn-outline-success btn-sm">Facture</button></td>
         </tr>
       </tbody>
     </table>

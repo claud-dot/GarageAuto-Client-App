@@ -17,8 +17,8 @@ export class ReceiveCarListComponent implements OnInit {
 
   constructor(public receiveCarService:ReceiveCarService,private router: Router , private build : FormBuilder){}
   
-  navigateToInvoice(){
-    this.router.navigate(['/home/invoice/create']);
+  navigateToInvoice(id_user : string , id_repair: string){
+    this.router.navigate(['/home/facture/create'],  { queryParams: { user_id : JSON.stringify(id_user) , repar_id : JSON.stringify(id_repair) } });
   }
 
   initForm(){
@@ -45,7 +45,7 @@ export class ReceiveCarListComponent implements OnInit {
   }
 
   ngOnInit(){
-    this.initForm();
+    // this.initForm();
     this.receiveCarService.getAll().subscribe((data:Repair[])=>{
       console.log(data);
       this.repairs=data;

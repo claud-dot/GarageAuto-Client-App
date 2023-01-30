@@ -16,15 +16,13 @@ export class HomeComponent implements OnInit {
     user : any;
     linkApp : any = []; 
     linkClient = [
-      { routeLink : '', name :  'Home' , icon : 'fa fa-home'},
+      { routeLink : '/home', name :  'Home' , icon : 'fa fa-home'},
       { routeLink : 'depot-car', name :  'Depot' , icon : 'fa fa-car'},
       { routeLink : 'repair', name :  'Reparation' , icon : 'fa fa-cogs'},
     ];
 
     linkAtelier = [
-      { routeLink : '', name :  '' , icon : ''},
-      { routeLink : '', name :  '' , icon : ''},
-      { routeLink : '', name :  '' , icon : ''},
+      { routeLink : 'receiveCar', name :  'Réception' , icon : 'fa fa-paper-plane'}
     ];
 
     linkFinancier = [
