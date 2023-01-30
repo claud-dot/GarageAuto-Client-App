@@ -11,7 +11,7 @@ export class AuthService {
   public roleUrl = [
     { role : "Client", urlDefault :  'home'},
     { role : "Responsable Financier" , urlDefault : "home/financier"},
-    { role : "Responsable Atelier" , urlDefault : "home/atelier"},
+    { role : "Responsable Atelier" , urlDefault : "home/receiveCar"},
   ]
 
   constructor(private http : HttpClient , private storage : StorageService) { }

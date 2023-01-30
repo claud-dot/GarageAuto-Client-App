@@ -12,7 +12,7 @@ export class InvoiceComponent implements OnInit {
     'width': '100%'
   };
   newRowValue: string;
-  tableRows:{value:string}[] = [];;
+  tableRows:{value:string}[] = [];
   
   constructor(private build: FormBuilder) {}
   

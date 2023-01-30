@@ -19,7 +19,8 @@ export class CarDepotComponent implements OnInit {
   constructor(
       private carService : CarService , 
       private utilsService : UtlisService ,
-      private utils: UtlisService){   
+      private utils: UtlisService , 
+      private route : Router){   
         this.dataSendRoute = window.history.state;
   }
 
@@ -67,6 +68,7 @@ export class CarDepotComponent implements OnInit {
     const success = (response : any)=>{
       this.utils.openToastr(response.message , 'Add car user' , 'success');
       this.loading.depot_car = false;
+      this.route.navigate(['/home/repair']);
     }
 
     const error = (error : HttpErrorResponse)=>{
