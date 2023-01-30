@@ -1,0 +1,9 @@
+.custom-backdrop {
+    z-index: 1045 !important;
+}
+.ligne-facture{
+    border-bottom: 2px solid rgb(227, 226, 226);
+}
+.icone-facture{
+    color:rgb(157, 245, 157);
+}

@@ -22,9 +22,7 @@ export class HomeComponent implements OnInit {
     ];
 
     linkAtelier = [
-      { routeLink : '', name :  '' , icon : ''},
-      { routeLink : '', name :  '' , icon : ''},
-      { routeLink : '', name :  '' , icon : ''},
+      { routeLink : 'receiveCar', name :  'Réception' , icon : 'fa fa-paper-plane'}
     ];
 
     linkFinancier = [
