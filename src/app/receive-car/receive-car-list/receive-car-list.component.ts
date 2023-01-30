@@ -45,7 +45,7 @@ export class ReceiveCarListComponent implements OnInit {
   }
 
   ngOnInit(){
-    this.initForm();
+    // this.initForm();
     this.receiveCarService.getAll().subscribe((data:Repair[])=>{
       console.log(data);
       this.repairs=data;
