@@ -88,7 +88,7 @@ table.table tr th:first-child {
 	width: 224px;
 }
 table.table tr th:last-child {
-	width: 116px;
+	width: 180px;
 }
 table.table-striped tbody tr:nth-of-type(odd) {
 	background-color: #fcfcfc;
@@ -129,7 +129,8 @@ table.table .avatar {
 }
 .status {
 	font-size: 30px;
-	margin: 2px 2px 0 0;
+	/* margin: 2px 2px 0 0; */
+	margin-right: 2px;
 	display: inline-block;
 	vertical-align: middle;
 	line-height: 10px;
@@ -200,7 +201,50 @@ table.table .avatar {
 
 .head-story{
 	box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%);
-	/* position: sticky;
-	top: 70px;
-	z-index: 1; */
+}
+
+.content-img{
+	position: relative;
+	border: none;
+}
+
+.content-img .svg-photo{
+	position: absolute;
+	width: 42px;
+    right: 24px;
+    bottom: 8px;
+	cursor: pointer;
+}
+
+article img{
+    max-width: 100%;
+    height: auto;
+}
+
+article{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow:hidden;
+    overflow-x:hidden;
+    overflow-y:hidden;
+    height: 250px;
+    width: 100%;
+	position: relative;
+}
+
+article .content-icon{
+	position: absolute;
+	border-radius: 50%;
+	background-color: #ecf0f19c;
+	padding: 20px;
+}
+
+.content-icon:hover img{
+	width: 55px;
+	animation: both 5s ease;
+}
+
+.content-icon img{
+	width: 50px;
 }

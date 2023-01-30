@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { CarService } from 'src/app/services/car.service';
+import { ImageService } from 'src/app/services/image.service';
 import { UtlisService } from 'src/app/services/utlis.service';
 
 @Component({
@@ -16,12 +17,13 @@ export class PaymentConfirmationComponent implements OnInit {
   metadata : any;
   dataPayment : any = {page : 1, nbBypage : 5};
 
-  constructor(private carService : CarService , private utils: UtlisService) {}
+  constructor(private carService : CarService , private utils: UtlisService , private imageService : ImageService) {}
  
 
   getPayements(){
     this.loading.payment = true;
     const success = (repairs : any)=>{
+      this.imageService.resizeAllImage(repairs.data , 280 , 280);
       this.payments = repairs.data;
       this.metadata = repairs.metadata[0];
       this.loading.payment = false;

@@ -1,5 +1,8 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/services/auth.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { UtlisService } from 'src/app/services/utlis.service';
 
@@ -14,7 +17,7 @@ export class HomeComponent implements OnInit {
     linkApp : any = []; 
     linkClient = [
       { routeLink : '', name :  'Home' , icon : 'fa fa-home'},
-      { routeLink : 'depot-car', name :  'Depot' , icon : 'fa fa-home'},
+      { routeLink : 'depot-car', name :  'Depot' , icon : 'fa fa-car'},
       { routeLink : 'repair', name :  'Reparation' , icon : 'fa fa-cogs'},
     ];
 
@@ -31,7 +34,7 @@ export class HomeComponent implements OnInit {
 
     loading : any = {};
 
-    constructor(private utils : UtlisService , private storage : StorageService) {
+    constructor(private utils : UtlisService, private authService : AuthService , private storage : StorageService ,private router : Router) {
       this.user = this.storage.get('USER_KEY');
     }
 
@@ -49,7 +52,24 @@ export class HomeComponent implements OnInit {
       this.utils.Logout(this.loading);
     }
 
+    checkCookies(){
+      this.loading.cookie= true;
+      const success = (data : any) =>{
+          console.log(data.token);
+          this.loading.cookie= false;
+      }
+
+      const error = (error :HttpErrorResponse)=>{
+          this.storage.removeItem('USER_KEY');
+          this.utils.openToastr(error.error , "Server error" , "error");
+          this.loading.cookie= false;
+          this.router.navigate(['login']);
+      }
+      this.authService.Cookies().subscribe(success, error);
+  }
+
     ngOnInit(): void {
+      this.checkCookies();
       this.linkActive();
     }
 }

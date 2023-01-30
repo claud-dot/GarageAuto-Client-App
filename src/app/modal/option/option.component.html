@@ -1,0 +1,17 @@
+<div class="modal-header">
+    <h4 class="modal-title">Confirmation ?</h4>
+    <button  type="button" class="btn-close m-0" aria-label="Close"></button>
+</div>
+<div class="modal-body" >
+    <div class="body-head">
+        <p>Voulez-vous vraiment supprimer cette voiture de votre listes ? </p>
+        <p>Toutes les actions associer à cette voiture seront supprimer </p>
+    </div>
+    <small><strong>Nb :</strong> Cette action est irreversible</small>
+</div>
+<div class="modal-footer">
+    <div>
+        <button type="button" class="btn btn-sm btn-secondary mr-1" (click)="onClose(true)">Yes</button>
+        <button type="button" class="btn btn-sm btn-secondary" (click)="onClose(false)">No</button>
+    </div>
+</div>

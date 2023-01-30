@@ -1,4 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+body{
+  font-family: Poppins,Arial,sans-serif;
+}
+
 .grand-spin{
     display: flex;
     justify-content: center;
@@ -41,4 +45,12 @@
 
 .scroll-data::-webkit-scrollbar-thumb:hover {
   background-color: #a8bbbf;
+}
+
+
+.title-h2 {
+  font-size: 30px !important;
+  font-weight: 500 !important;
+  line-height: 1.5 !important;
+  color: #333 !important;
 }
