@@ -19,6 +19,6 @@ export class UserService {
   constructor(private httpClient: HttpClient) { }
 
   getById(id_user : string):Observable<User>{
-    return this.httpClient.get<User>(this.apiServer+'/user/get/'+id_user);
+    return this.httpClient.get<User>(this.apiServer+'user/get/'+id_user);
   }
 }

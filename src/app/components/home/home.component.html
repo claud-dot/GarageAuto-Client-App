@@ -4,10 +4,13 @@
             <h1><a [routerLink]="['home']" class="logo">M.</a></h1>
     <ul class="list-unstyled components mb-5">
       <li *ngFor="let link of linkApp">
-        <a [routerLink]="[link.routeLink]"><span [class]="link.icon"></span>{{link.name}}</a>
+        <a [routerLink]="[link.routeLink]"  routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" ><span [class]="link.icon"></span>{{link.name}}</a>
       </li>
       <li>
-        <a (click)="LogOut()"><span class="fa fa-sign-out" ></span>Sign Out</a>
+        <a [routerLink]="['receiveCar']"><span class="fa fa-paper-plane"></span> Réception</a>
+      </li>
+      <li>
+        <a style="cursor: pointer;" (click)="LogOut()"><span class="fa fa-sign-out" ></span>Sign Out</a>
       </li> 
     </ul>
     
@@ -32,10 +35,10 @@
     
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="nav navbar-nav ml-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home</a>
+            <li class="nav-item" *ngFor="let link of linkApp">
+                <a class="nav-link" [routerLink]="[link.routeLink]"  routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">{{link.name}}</a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link" href="#">About</a>
             </li>
             <li class="nav-item">
@@ -43,7 +46,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Contact</a>
-            </li>
+            </li> -->
           </ul>
         </div>
       </div>

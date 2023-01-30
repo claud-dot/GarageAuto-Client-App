@@ -6,7 +6,6 @@ import { InvoiceService, Invoice, Comment } from "../invoice.service";
 import { elementAt } from "rxjs";
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
-import swal from 'sweetalert2';
 import Swal from 'sweetalert2';
 import { async } from '@angular/core/testing';
 @Component({
@@ -18,6 +17,8 @@ export class InvoiceComponent {
   tableStyles = {
     'width': '100%'
   };
+
+
   tableData: { line_number: number; description: string; quantite: Number; prix_unitaire: number; prix_total: number }[] = [];
   inputData = {
     line_number: 1,
@@ -30,6 +31,7 @@ export class InvoiceComponent {
   sub_total = 0;
   tva = 0;
   total = 0;
+
   user: User = {
     _id: '',
     username: '',
@@ -85,10 +87,14 @@ export class InvoiceComponent {
   ngOnInit() {
     // alert('ato');
     this.route.queryParams.subscribe(params => {
-      let user_id = JSON.parse(params['user_id']);
-      let repair_id = JSON.parse(params["repair_id"]);
+      console.log(params);
+      
+      let user_id = params['user_id'];
+      let repair_id = params["repair_id"];
+      console.log(user_id);
       this.repair_id = repair_id;
       this.getUser(user_id);
+      console.log(this.user);
       // alert(this.repair_id);
       // alert(this.user.username);
     });
@@ -96,6 +102,8 @@ export class InvoiceComponent {
   getUser(id: string) {
     this.userService.getById(id).subscribe(data => {
       this.user = data;
+      console.log(this.user);
+      
     }, error => {
       console.log(error);
     })

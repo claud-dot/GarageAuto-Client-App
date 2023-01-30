@@ -1,4 +1,4 @@
-<!-- <div class="content-receive">
+<div class="content-receive">
   <div class="scroll-data" >
     <table class="table table-responsive-md table-hover tab-scroll" >
       <thead>
@@ -18,8 +18,8 @@
           <td>{{repair.user_car.mark}}</td>
           <td>{{repair.user_car.model}}</td>
           <td>{{repair.comment}}</td>
-          <td><button type="button" (click)="navigateToInvoice()" class="btn btn-outline-success btn-sm">Facture</button></td>
+          <td><button type="button" (click)="navigateToInvoice(repair.user_car.user_id,repair._id)" class="btn btn-outline-success btn-sm">Facture</button></td>
         </tr>
       </tbody>
     </table>
-</div> -->
+</div>
